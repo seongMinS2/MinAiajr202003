@@ -10,7 +10,7 @@ public class Test1 {
 		 *
 		 */
 		
-		System.out.println("2+5= " + 2+5); //2+5= 25
+		System.out.println("2+5= " + 2+5+8); //2+5= 25
 		System.out.println("2+5= " + (2+5)); // 2+5 =7
 		
 		
