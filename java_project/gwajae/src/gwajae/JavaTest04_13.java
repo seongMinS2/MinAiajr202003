@@ -1,6 +1,6 @@
 package gwajae;
 
-public class JavaTest4_13 {
+public class JavaTest04_13 {
     public static void main(String[] args) {
 
         int k = 10;
