@@ -5,7 +5,7 @@ public class FruitSalesMain1 {
 
         //샐러 생성 : 인스턴스화
         FruitSeller seller = new FruitSeller();
-
+        FruitSeller seller2 = new FruitSeller();
         //바이어 생성 : 인스턴스화
         FruitBuyer buyer = new FruitBuyer();
 
@@ -17,6 +17,7 @@ public class FruitSalesMain1 {
 
         System.out.println("과일 구매자의 현재 상황");
         buyer.showBuyResult();
+
 
     }
 }

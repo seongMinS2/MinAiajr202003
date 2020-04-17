@@ -1,8 +1,21 @@
 package ex;
 
 public class FruitBuyer {
-    int myMoney=5000;   //구매자 보유 머니
-    int numOfApple=0;   //구매자 보유 사과
+
+    //변수의 명시적 초기화 변경
+    int myMoney;   //구매자 보유 머니
+    int numOfApple;   //구매자 보유 사과
+
+    //생성자
+    FruitBuyer(){
+        myMoney = 5000;
+        numOfApple = 0;
+    }
+
+    FruitBuyer(int money, int num){
+        myMoney = money;
+        numOfApple = num;
+    }
 
     //구매 메소드
     public void buyApple(FruitSeller seller, int money)
