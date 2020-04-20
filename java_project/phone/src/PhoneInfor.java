@@ -18,4 +18,16 @@ public class PhoneInfor {
         this.phoneNumber = phoneNumber;
         this.birthday = birthday;
     }
+
+    PhoneInfor(){}
+
+    //객체의 정보를 읽기 위해 toString메서드 재정의
+    @Override
+    public String toString() {
+        return "고객정보{" +
+                "이름='" + name + '\'' +
+                ", 전화번호='" + phoneNumber + '\'' +
+                ", 생일='" + birthday + '\'' +
+                '}';
+    }
 }
