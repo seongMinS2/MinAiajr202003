@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/Exam/Exam1.iml" filepath="$PROJECT_DIR$/Exam/Exam1.iml" />
       <module fileurl="file://$PROJECT_DIR$/FirstJAVA/FirstJAVA.iml" filepath="$PROJECT_DIR$/FirstJAVA/FirstJAVA.iml" />
       <module fileurl="file://$PROJECT_DIR$/FirstJAVA/FirstJAVA1.iml" filepath="$PROJECT_DIR$/FirstJAVA/FirstJAVA1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cp07-ConsoleinputOutput/cp07-ConsoleinputOutput.iml" filepath="$PROJECT_DIR$/cp07-ConsoleinputOutput/cp07-ConsoleinputOutput.iml" />
       <module fileurl="file://$PROJECT_DIR$/cp3-Operator/cp3-Operator.iml" filepath="$PROJECT_DIR$/cp3-Operator/cp3-Operator.iml" />
       <module fileurl="file://$PROJECT_DIR$/cp3-Operator/cp3-Operator1.iml" filepath="$PROJECT_DIR$/cp3-Operator/cp3-Operator1.iml" />
       <module fileurl="file://$PROJECT_DIR$/cp5/cp5.iml" filepath="$PROJECT_DIR$/cp5/cp5.iml" />
@@ -16,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/cp7/cp7.iml" filepath="$PROJECT_DIR$/cp7/cp7.iml" />
       <module fileurl="file://$PROJECT_DIR$/gwajae/gwajae.iml" filepath="$PROJECT_DIR$/gwajae/gwajae.iml" />
       <module fileurl="file://$PROJECT_DIR$/gwajae/gwajae1.iml" filepath="$PROJECT_DIR$/gwajae/gwajae1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/selfTest/phone.iml" filepath="$PROJECT_DIR$/selfTest/phone.iml" />
       <module fileurl="file://$PROJECT_DIR$/selfTest/selfTest.iml" filepath="$PROJECT_DIR$/selfTest/selfTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/selfTest/selfTest1.iml" filepath="$PROJECT_DIR$/selfTest/selfTest1.iml" />
     </modules>
