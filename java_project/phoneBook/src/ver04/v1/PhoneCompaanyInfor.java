@@ -1,4 +1,4 @@
-package ver04;
+package ver04.v1;
 
 public class PhoneCompaanyInfor extends PhoneInfor {
 
@@ -23,9 +23,9 @@ public class PhoneCompaanyInfor extends PhoneInfor {
     @Override
     void showInfo() {
         super.showInfo();
-        System.out.println("이름:" + this.address);
-        System.out.println("전화번호:" + this.email);
-        System.out.println("생일:" + this.company);
+        System.out.println("주소: " + this.address);
+        System.out.println("이메일: " + this.email);
+        System.out.println("회사: " + this.company);
     }
 
     @Override

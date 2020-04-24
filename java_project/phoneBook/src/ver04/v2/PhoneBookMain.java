@@ -1,4 +1,4 @@
-package ver04;
+package ver04.v2;
 
 import java.util.Scanner;
 
@@ -19,6 +19,8 @@ public class PhoneBookMain {
                 // 정보를 배열에 저장
                 case 1:
                     PhoneInfor info = manager.createInstance();
+                    //PhoneCompaanyInfor info = manager.createInstance();
+                    //Phoneunivlnfor info = manager.createInstance();
                     manager.addInfo(info);
                     break;
 //                검색

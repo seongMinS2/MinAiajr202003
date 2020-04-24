@@ -1,4 +1,4 @@
-package ver04;
+package ver04.v2;
 
 public class PhoneUnivlnfor extends PhoneInfor {
 
@@ -26,10 +26,10 @@ public class PhoneUnivlnfor extends PhoneInfor {
     @Override
     void showInfo() {
         super.showInfo();
-        System.out.println("이름:" + this.address);
-        System.out.println("전화번호:" + this.email);
-        System.out.println("생일:" + this.major);
-        System.out.println("생일:" + this.year);
+        System.out.println("주소:" + this.address);
+        System.out.println("이메일:" + this.email);
+        System.out.println("전공:" + this.major);
+        System.out.println("학년:" + this.year);
     }
 
     @Override
