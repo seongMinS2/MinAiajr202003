@@ -1,48 +1,35 @@
 package ver04.v3;
 
-import java.util.Scanner;
-
 public class PhoneBookMain {
     public static void main(String[] args) {
 
-        PhoneBookManager manager = new PhoneBookManager();
+        PhoneBookManager manager = new PhoneBookManager(100);
 
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-
+        while(true){
             Menu.showMenu();
-            int selectNum = sc.nextInt();
-            //sc.nextLine();
-            switch (selectNum) {
-                // 사용자의 입력 데이터를 인스턴스 생성
-                // 정보를 배열에 저장
+
+            int select = manager.sc.nextInt();
+            manager.sc.nextLine();
+
+            switch(select){
                 case 1:
-                    PhoneInfor info = manager.createInstance();
-                    manager.addInfo(info);
+                    manager.createInfo();
                     break;
-//                검색
                 case 2:
-                    manager.searchInfo();
+                    //manager.searchIndex();
                     break;
-//                이름으로 검색후 삭제
                 case 3:
                     manager.deleteInfo();
                     break;
-//                전체 리스트 출력
                 case 4:
-                    manager.showAllData();
+                    manager.editInfo();
                     break;
                 case 5:
-                    //return;
-                    System.exit(0);
+                    manager.showAllInfo();
+                    break;
+                case 6:
+                    break;
             }
-
-//            // 정보를 배열에 저장
-
-
         }
-
-
     }
 }

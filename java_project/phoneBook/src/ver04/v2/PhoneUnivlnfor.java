@@ -31,10 +31,4 @@ public class PhoneUnivlnfor extends PhoneInfor {
         System.out.println("전공:" + this.major);
         System.out.println("학년:" + this.year);
     }
-
-    @Override
-    boolean checkName(String name) {
-        return super.checkName(name);
-    }
-
 }

@@ -27,9 +27,4 @@ public class PhoneCompaanyInfor extends PhoneInfor {
         System.out.println("이메일: " + this.email);
         System.out.println("회사: " + this.company);
     }
-
-    @Override
-    boolean checkName(String name) {
-        return super.checkName(name);
-    }
 }

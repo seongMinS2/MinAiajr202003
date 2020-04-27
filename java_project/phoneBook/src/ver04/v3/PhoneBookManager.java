@@ -36,6 +36,7 @@ public class PhoneBookManager {
         books[numOfInfo++] = info;
     }
 
+
     // 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
     void createInfo() {
         System.out.println(" 1.일반 2.대학 3.회사 4.동호회");
@@ -103,7 +104,6 @@ public class PhoneBookManager {
     // 3. 배열의 데이터 출력
     void showAllInfo(){
 
-
         // for each 반복 : 현재 프로그램에서는 사용 불가
 
         // for 반복문 : 반복의 횟수 지정이 가능 numOfInfo
@@ -111,6 +111,7 @@ public class PhoneBookManager {
         System.out.println("전체 정보를 출력합니다. ================");
         for(int i=0; i<numOfInfo; i++){
             books[i].showAllInfo();
+            System.out.println("-------------------------------");
         }
     }
     // 4. 배열의 정보 검색 : 이름 기준
@@ -122,14 +123,27 @@ public class PhoneBookManager {
         //배열의 반복으로 name값을 비교해서 index 값을 찾는다.
         for(int i=0; i<numOfInfo; i++){
             if(books[i].name.equals(name)){
-                books[i].showInfo();
                 searchIndex = i;
-            }else{
-                System.out.println("찾으시는 데이터가 없습니다.");
+                break;
             }
         }
         return searchIndex;
     }
+
+    void showInfo(){
+        System.out.println("검색하실 이름을 입력하세요.");
+        String name = sc.nextLine();
+
+        int index = searchIndex(name);
+        if(index<0){
+            System.out.println("검색하신 이름의 정보가 없습니다.");
+        } else{
+            System.out.println();
+            books[index].showInfo();
+            System.out.println();
+        }
+    }
+
     // 5. 배열의 정보를 삭제 : 이름 기준
     void deleteInfo(){
         System.out.println("삭제하고자하는 이름을 입력해주세요.");
@@ -156,6 +170,7 @@ public class PhoneBookManager {
         String name = sc.nextLine();
 
         int index = searchIndex(name);
+        PhoneInfor info = null;
 
         if(index<0){
             System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
@@ -194,8 +209,11 @@ public class PhoneBookManager {
                 System.out.println("닉네임을 입력해주세요.");
                 String nicName = sc.nextLine();
 
-                info new PhoneCafeInfo(name,phoneNumber,addr,email,cafeName,nicName);
+                info = new PhoneCafeInfo(name,phoneNumber,addr,email,cafeName,nicName);
             }
+
+            // 배열에 새로운 데이터를 저장
+            books[index] = info;
         }
     }
 
