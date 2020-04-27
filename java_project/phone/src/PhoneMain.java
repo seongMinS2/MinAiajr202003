@@ -20,7 +20,7 @@ public class PhoneMain {
             System.out.println("======================================================");
             System.out.println("1. 개인정보 저장 || 2. 검색 || 3. 삭제 || 4. 나가기");
             String num = sc.nextLine();
-
+            //sc.nextLine();
             //개인정보 저장
             if (num.equals("1")) {
                 System.out.println("======================================================");

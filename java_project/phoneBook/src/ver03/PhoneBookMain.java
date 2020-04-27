@@ -13,7 +13,7 @@ public class PhoneBookMain {
 
             Menu.showMenu();
             int selectNum = sc.nextInt();
-            sc.nextLine();
+            //sc.nextLine();
             switch (selectNum) {
                 // 사용자의 입력 데이터를 인스턴스 생성
                 // 정보를 배열에 저장

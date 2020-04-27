@@ -121,32 +121,32 @@ public class PhoneBookManager {
 
             case 3:
                 System.out.println("이름을 입력해주세요.>> ");
-                name = sc.nextLine();
+            name = sc.nextLine();
 
-                System.out.println("전화번호를 입력해 주세요. >>");
-                phoneNumber = sc.nextLine();
+            System.out.println("전화번호를 입력해 주세요. >>");
+            phoneNumber = sc.nextLine();
 
-                System.out.println("생일을 입력해 주세요. >>");
-                birthday = sc.nextLine();
-                //공통
-                System.out.println("주소를 입력해 주세요. >>");
-                address = sc.nextLine();
+            System.out.println("생일을 입력해 주세요. >>");
+            birthday = sc.nextLine();
+            //공통
+            System.out.println("주소를 입력해 주세요. >>");
+            address = sc.nextLine();
 
-                System.out.println("이메일을 입력해 주세요. >>");
-                email = sc.nextLine();
+            System.out.println("이메일을 입력해 주세요. >>");
+            email = sc.nextLine();
 
-                //회사
-                System.out.println("회사를 입력해 주세요. >>");
-                company = sc.nextLine();
+            //회사
+            System.out.println("회사를 입력해 주세요. >>");
+            company = sc.nextLine();
 
-                //사용자의 입력 데이터에 따라 인스턴스 생성 방법을 구분
-                if (birthday == null || birthday.trim().isEmpty()) {
-                    info = new PhoneCompaanyInfor(name, phoneNumber,address,email,company);
-                } else {
-                    info = new PhoneCompaanyInfor(name, phoneNumber, birthday,address,email,company);
-                }
+            //사용자의 입력 데이터에 따라 인스턴스 생성 방법을 구분
+            if (birthday == null || birthday.trim().isEmpty()) {
+                info = new PhoneCompaanyInfor(name, phoneNumber,address,email,company);
+            } else {
+                info = new PhoneCompaanyInfor(name, phoneNumber, birthday,address,email,company);
+            }
 
-                break;
+            break;
         }
 
         return info;
