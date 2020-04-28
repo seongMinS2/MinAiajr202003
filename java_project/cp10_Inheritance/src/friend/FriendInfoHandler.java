@@ -13,10 +13,16 @@ public class FriendInfoHandler {
     private int numOfFriend;        //저장된 친구의 정보 개수
     Scanner sc = new Scanner(System.in);
 
+
     //초기화 : 저장공간(사이즈) 크기를 받아서 배열 생성
-    FriendInfoHandler(int num) {
+    private FriendInfoHandler(int num) {
         myFriends = new Friend[num];
         numOfFriend = 0;
+    }
+
+    private static FriendInfoHandler handler = new FriendInfoHandler(100);
+    public static FriendInfoHandler getInstance(){
+        return handler;
     }
 
     // 친구 정보를 저장하는 기능

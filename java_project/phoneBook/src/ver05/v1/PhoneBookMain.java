@@ -1,33 +1,34 @@
-package ver04.v3;
+package ver05.v1;
 
 public class PhoneBookMain {
     public static void main(String[] args) {
 
-        PhoneBookManager manager = new PhoneBookManager(100);
+        //PhoneBookManager manager = new PhoneBookManager(100);
+        PhoneBookManager manager = PhoneBookManager.getInstance();
 
-        while(true){
+        while (true) {
             Menu.showMenu();
 
             int select = manager.sc.nextInt();
             manager.sc.nextLine();
 
-            switch(select){
-                case 1:
+            switch (select) {
+                case MenuNaming.CREATE:
                     manager.createInfo();
                     break;
-                case 2:
+                case MenuNaming.SEARCH:
                     manager.showInfo();
                     break;
-                case 3:
+                case MenuNaming.DELETE:
                     manager.deleteInfo();
                     break;
-                case 4:
+                case MenuNaming.EDIT:
                     manager.editInfo();
                     break;
-                case 5:
+                case MenuNaming.SHOW_ALL:
                     manager.showAllInfo();
                     break;
-                case 6:
+                case MenuNaming.EXIT:
                     break;
             }
         }

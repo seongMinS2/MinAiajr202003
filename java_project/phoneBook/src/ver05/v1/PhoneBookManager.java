@@ -1,4 +1,4 @@
-package ver04.v3;
+package ver05.v1;
 
 import java.util.Scanner;
 
@@ -24,6 +24,12 @@ public class PhoneBookManager {
         sc = new Scanner(System.in);
     }
 
+    //싱글톤 패턴
+    private static PhoneBookManager book = new PhoneBookManager(100);
+    public static PhoneBookManager getInstance(){
+        return book;
+    }
+
     // 2. 배열에 정보 저장
     // 2.1 배열에 추가
     // 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
@@ -39,7 +45,7 @@ public class PhoneBookManager {
 
     // 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
     void createInfo() {
-        System.out.println(" 1.일반 2.대학 3.회사 4.동호회");
+        System.out.println(" 1.대학 2.회사 3.동호회");
 
         System.out.println("입력하고자 하는 번호를 입력해주세요.");
 
@@ -59,11 +65,14 @@ public class PhoneBookManager {
         PhoneInfor info = null;
 
         switch (select) {
-            case 1:
+
+            //PhoneInfor 객체가 추상화되어 사용할 수 없어짐
+            //강사님도 기본정보 입력을 없애고 간다고 하심.
+         /*   case MenuNaming.NOMAL:
                 //2.2.2 기본 클래스로 인스턴스 생성
                 info = new PhoneInfor(name, phoneNumber, addr, email);
-                break;
-            case 2:
+                break;*/
+            case MenuNaming.UNIVERSITY:
                 System.out.println("전공(학과)f를 입력해주세요.");
                 String major = sc.nextLine();
                 System.out.println("학년 정보를 입력해주세요.");
@@ -73,7 +82,7 @@ public class PhoneBookManager {
                 info = new PhoneUnivInfo(name, phoneNumber, addr, email, major, grade);
 
                 break;
-            case 3:
+            case MenuNaming.COMPANY:
                 System.out.println("회사의 이름을 입력해주세요.");
                 String company = sc.nextLine();
                 System.out.println("부서의 이름을 입력해주세요.");
@@ -84,7 +93,7 @@ public class PhoneBookManager {
                 //2.2.4 회사 클래스로 인스턴스 생성
                 info = new PhoneCompanyInfo(name, phoneNumber, addr, email, company, dept, job);
                 break;
-            case 4:
+            case MenuNaming.CAFE:
                 System.out.println("동호회 이름을 입려해주세요.");
                 String cafeName = sc.nextLine();
                 System.out.println("닉네임을 입려해주세요.");
@@ -101,28 +110,30 @@ public class PhoneBookManager {
 
         addInfo(info);
     }
+
     // 3. 배열의 데이터 출력
-    void showAllInfo(){
+    void showAllInfo() {
 
         // for each 반복 : 현재 프로그램에서는 사용 불가
 
         // for 반복문 : 반복의 횟수 지정이 가능 numOfInfo
 
         System.out.println("전체 정보를 출력합니다. ================");
-        for(int i=0; i<numOfInfo; i++){
+        for (int i = 0; i < numOfInfo; i++) {
             books[i].showAllInfo();
             System.out.println("-------------------------------");
         }
     }
+
     // 4. 배열의 정보 검색 : 이름 기준
-    int searchIndex(String name){
+    int searchIndex(String name) {
 
         //정상적인 index 값은 0~이상의 값, 찾지 못했을 때 구분 값 -1을 사용
         int searchIndex = -1;
 
         //배열의 반복으로 name값을 비교해서 index 값을 찾는다.
-        for(int i=0; i<numOfInfo; i++){
-            if(books[i].name.equals(name)){
+        for (int i = 0; i < numOfInfo; i++) {
+            if (books[i].name.equals(name)) {
                 searchIndex = i;
                 break;
             }
@@ -130,14 +141,14 @@ public class PhoneBookManager {
         return searchIndex;
     }
 
-    void showInfo(){
+    void showInfo() {
         System.out.println("검색하실 이름을 입력하세요.");
         String name = sc.nextLine();
 
         int index = searchIndex(name);
-        if(index<0){
+        if (index < 0) {
             System.out.println("검색하신 이름의 정보가 없습니다.");
-        } else{
+        } else {
             System.out.println();
             books[index].showAllInfo();
             System.out.println();
@@ -145,18 +156,18 @@ public class PhoneBookManager {
     }
 
     // 5. 배열의 정보를 삭제 : 이름 기준
-    void deleteInfo(){
+    void deleteInfo() {
         System.out.println("삭제하고자하는 이름을 입력해주세요.");
         String name = sc.nextLine();
 
         int index = searchIndex(name);
 
-        if(index<0){
+        if (index < 0) {
             System.out.println("삭제하고자 하는이름의 정보가 없습니다.");
-        } else{
+        } else {
             //삭제 위치에서 왼쪽으로 시프트
-            for(int i=index; i<numOfInfo-1; i++){
-                books[i] = books[i+1];
+            for (int i = index; i < numOfInfo - 1; i++) {
+                books[i] = books[i + 1];
             }
             //삭제가 되었으므로 요소의 개수도 -1
             numOfInfo--;
@@ -164,7 +175,7 @@ public class PhoneBookManager {
     }
 
     // 6. 배열의 정보를 수정 : 이름 기준
-    void editInfo(){
+    void editInfo() {
 
         System.out.println("변경하고자 하는 이름을 입력해주세요.");
         String name = sc.nextLine();
@@ -172,9 +183,9 @@ public class PhoneBookManager {
         int index = searchIndex(name);
         PhoneInfor info = null;
 
-        if(index<0){
+        if (index < 0) {
             System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
-        }else{
+        } else {
 
             String editName = books[index].name;
             System.out.println("수정 데이터 입력을 시작합니다.");
@@ -185,31 +196,29 @@ public class PhoneBookManager {
             String addr = sc.nextLine();
             System.out.println("이메일을 입력해주세요.");
             String email = sc.nextLine();
-            // 저장된 인스턴스가 : 기본, 대학, 회사, 동호회
-            if(books[index] instanceof PhoneInfor){
-                info = new PhoneInfor(name,phoneNumber,addr,email);
-            } else if(books[index] instanceof PhoneUnivInfo){
+            // 저장된 인스턴스가 : 대학, 회사, 동호회
+            if (books[index] instanceof PhoneUnivInfo) {
                 System.out.println("전공을 입력해주세요.");
                 String major = sc.nextLine();
                 System.out.println("학년을 입력해주세요.");
                 String grade = sc.nextLine();
 
-                info = new PhoneUnivInfo(name,phoneNumber,addr,email,major,grade);
-            } else if(books[index] instanceof PhoneCompanyInfo){
+                info = new PhoneUnivInfo(name, phoneNumber, addr, email, major, grade);
+            } else if (books[index] instanceof PhoneCompanyInfo) {
                 System.out.println("회사를 입력해주세요.");
                 String company = sc.nextLine();
                 System.out.println("부서를 입력해주세요.");
                 String dept = sc.nextLine();
                 System.out.println("직급을 입력해주세요.");
                 String job = sc.nextLine();
-                info = new PhoneCompanyInfo(name,phoneNumber,addr,email,company,dept,job);
-            } else if(books[index] instanceof PhoneCafeInfo){
+                info = new PhoneCompanyInfo(name, phoneNumber, addr, email, company, dept, job);
+            } else if (books[index] instanceof PhoneCafeInfo) {
                 System.out.println("동호회 이름을 입력해주세요.");
                 String cafeName = sc.nextLine();
                 System.out.println("닉네임을 입력해주세요.");
                 String nicName = sc.nextLine();
 
-                info = new PhoneCafeInfo(name,phoneNumber,addr,email,cafeName,nicName);
+                info = new PhoneCafeInfo(name, phoneNumber, addr, email, cafeName, nicName);
             }
 
             // 배열에 새로운 데이터를 저장

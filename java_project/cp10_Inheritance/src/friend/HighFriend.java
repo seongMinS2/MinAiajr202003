@@ -1,6 +1,6 @@
 package friend;
 
-public class HighFriend extends Friend {
+public class HighFriend extends Friend implements Info {
 
     String work;    //친구의 직업
 
@@ -10,7 +10,7 @@ public class HighFriend extends Friend {
     }
 
     @Override
-    void showData() {
+    public void showData() {
         showBasicInfo();
         System.out.println("직업 : " + work);
     }

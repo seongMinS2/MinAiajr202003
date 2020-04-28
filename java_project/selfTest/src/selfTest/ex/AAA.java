@@ -1,5 +1,10 @@
 package selfTest.ex;
 
 public class AAA {
-    public int num = 2;
+    private int num = 2;
+
+    public int getNum() {
+
+        return num;
+    }
 }

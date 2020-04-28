@@ -1,8 +1,8 @@
-package ver04.v3;
+package ver05.v1;
 
-public class PhoneInfor {
+public abstract class PhoneInfor implements Info {
 
-    // private : 변수의 직접 참조를 막는다, 정보은닉
+     //private : 변수의 직접 참조를 막는다, 정보은닉
      String name;            //이름
      String phoneNumber;     //전화번호
      String addr;           //주소
@@ -15,13 +15,7 @@ public class PhoneInfor {
         this.email = email;
     }
 
-    void showInfo(){
-        System.out.println("이름: " + this.name);
-        System.out.println("전화번호: " + this.phoneNumber);
-        System.out.println("생일: " + this.addr);
-        System.out.println("이메일: " + this.email);
-    }
-    void showAllInfo(){
+    public void showAllInfo(){
         System.out.println("이름:" + this.name);
         System.out.println("전화번호:" + this.phoneNumber);
         System.out.println("주소: " + this.addr);

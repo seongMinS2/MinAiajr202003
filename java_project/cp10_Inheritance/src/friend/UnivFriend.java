@@ -1,6 +1,6 @@
 package friend;
 
-public class UnivFriend extends Friend {
+public class UnivFriend extends Friend implements Info {
 
     String major;   //친구의 전공
     int grade;      //친구의 학년
@@ -12,7 +12,7 @@ public class UnivFriend extends Friend {
     }
 
     @Override
-    void showData() {
+    public void showData() {
         showBasicInfo();
         System.out.println("전공 : " + major);
         System.out.println("학년 : " + grade);
