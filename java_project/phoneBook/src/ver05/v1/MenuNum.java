@@ -1,6 +1,6 @@
 package ver05.v1;
 
-public interface MenuNaming {
+public interface MenuNum {
 
     //메인 메뉴 selectNumber
     final static int CREATE = 1;

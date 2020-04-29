@@ -3,9 +3,9 @@ package ex;
 public class RuntimExceptionCase {
     public static void main(String[] args) {
 
-        try {
-            int[] arr = new int[3];
-            arr[3] = 20;
+            try {
+                int[] arr = new int[3];
+                arr[3] = 20;
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
