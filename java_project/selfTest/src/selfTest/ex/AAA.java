@@ -7,4 +7,8 @@ public class AAA {
 
         return num;
     }
+
+    public static class CCC {
+        int numC = 1;
+    }
 }
