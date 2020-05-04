@@ -22,7 +22,6 @@
       <module fileurl="file://$PROJECT_DIR$/phone/phone.iml" filepath="$PROJECT_DIR$/phone/phone.iml" />
       <module fileurl="file://$PROJECT_DIR$/phoneBook/phoneBook.iml" filepath="$PROJECT_DIR$/phoneBook/phoneBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/selfTest/selfTest.iml" filepath="$PROJECT_DIR$/selfTest/selfTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/webTestModul/webTestModul.iml" filepath="$PROJECT_DIR$/webTestModul/webTestModul.iml" />
     </modules>
   </component>
 </project>

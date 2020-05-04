@@ -17,28 +17,27 @@ public class LinkedTest {
         d1.setNextValue(str4);
 
 
-
         d1.setNextValue(str3);
 
 
     }
 }
 
-class Data{
+class Data {
 
     Object value;
     Object nextValue;
 
-    Data(Object obj, Object nextObj){
+    Data(Object obj, Object nextObj) {
         this.value = obj;
         this.nextValue = nextObj;
     }
 
-    Object getValue(){
+    Object getValue() {
         return value;
     }
 
-    void setNextValue(Object nextValue){
+    void setNextValue(Object nextValue) {
         this.nextValue = nextValue;
     }
 }

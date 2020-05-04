@@ -2,7 +2,6 @@ package ver06;
 
 public abstract class PhoneInfor implements Info {
 
-     //private : 변수의 직접 참조를 막는다, 정보은닉
      String name;            //이름
      String phoneNumber;     //전화번호
      String addr;           //주소
