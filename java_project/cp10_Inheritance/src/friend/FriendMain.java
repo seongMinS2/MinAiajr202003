@@ -22,6 +22,7 @@ public class FriendMain {
             try {
 
                 choice = handler.sc.nextInt();
+                handler.sc.nextLine();
 
             } catch (InputMismatchException e){  // inputMissmatchException 인스턴스 전달
                 System.out.println("정상적인 메뉴의 번호 입력이 되지 않았습니다.");
