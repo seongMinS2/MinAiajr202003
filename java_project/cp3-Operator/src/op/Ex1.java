@@ -11,8 +11,7 @@ public class Ex1 {
 		int num3 = 30;
 		
 		System.out.println(num1=num2=num3);
-		
-	
+
 	}
 
 }
