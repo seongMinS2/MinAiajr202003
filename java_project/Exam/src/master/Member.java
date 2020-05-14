@@ -13,7 +13,7 @@ public class Member extends MemberInfo{
 	public int rentalDate;			//대여일 7
 	public String returnDate;		//반납예정일 
 	public String rentInfo;			//대여상태 
-	public int dataOfExtens;		//연장기간 7
+	public int ExtenDate;		//연장된 반납일 = 반납예정일 +7
 	
 	
 	
@@ -25,11 +25,11 @@ public class Member extends MemberInfo{
 		this.pw = pw;
 		this.level = 1;
 		this.numOfRent = 0;
-		this.rentalAvail = 5;
+		this.rentalAvail = 5-numOfRent;
 		this.numOfExtens = 1;
 		this.overdue = 0;
 		this.rentalDate = 7;
-		this.dataOfExtens = 7;
+		this.ExtenDate = 7;
 	
 	}
 	public Member() {
@@ -48,7 +48,7 @@ public class Member extends MemberInfo{
 	void AllInformation() {
 		super.showBasicInfo();
 		System.out.println("등급 :"+level+"\t\t\t대여권수 :"+numOfRent+"\t\t\t\t대여가능권수 :"+rentalAvail+"\t\t\t연장가능횟수 :"+numOfExtens+"\t\t\t연체 :"+overdue);
-		System.out.println("대여일 :"+rentalDate+"\t반납예정일 :"+returnDate+"\t\t\t대여상태 :"+rentInfo+"\t\t\t연장기간 :"+dataOfExtens);
+		System.out.println("대여일 :"+rentalDate+"\t반납예정일 :"+returnDate+"\t\t\t대여상태 :"+rentInfo+"\t\t\t연장된 반납일 :"+ExtenDate);
 	}
 	
 	boolean checkId(String id) {

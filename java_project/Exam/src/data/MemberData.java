@@ -21,8 +21,8 @@ public class MemberData extends Member{
 		this.rentalDate = 7;
 		this.returnDate = "0";
 		this.rentInfo = "없음";
-		this.dataOfExtens = 7;
-		
+//		this.dataOfExtens = 7;
+
 		
 	}
 

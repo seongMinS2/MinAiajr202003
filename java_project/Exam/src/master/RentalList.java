@@ -38,11 +38,11 @@ public class RentalList {
 	
 	
 	public void showRentalListInfo() {
-		System.out.println("대여 ID : "+id+"\t\t대여 자료명 : "+title+"\t\t대여상태 :"+rentInfo);
-		System.out.println("대여일: :"+rentalDate+"\t\t반납예정일 :"+returnLimit+"\t\t반납일 :"+returnDate);
-		System.out.println("예약일: :"+reservDate+"\t\t예약자 :"+reservId);
-		System.out.println("연장기간 : "+extendDate+"\t\t연체기간: :"+overdue);
-		System.out.println("--------------------------------------------------------------");  
+		System.out.println("대여 ID : "+id+"\t\t대여 자료명 : "+title+"\t\t대여상태 : "+rentInfo);
+		System.out.println("대여일    : "+rentalDate+"\t\t반납예정일 : "+returnLimit+"\t\t반납일 : "+returnDate);
+		System.out.println("연체기간: "+overdue+"\t\t연장기간 : "+extendDate);
+		System.out.println("예약일    : "+reservDate+"\t\t예약자 : "+reservId);
+        System.out.println("--------------------------------------------------------------------------------------------------");
 
     }
 }
