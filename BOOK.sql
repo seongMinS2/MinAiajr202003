@@ -1,73 +1,69 @@
+--emp table  : ì‚¬ì›ì •ë³´
+--dept table : ë¶€ì„œì •ë³´
+--bonus table: ì„ì‹œ í…Œì´ë¸”
+--salgrade table:ê¸‰ì—¬ ì •ë³´ 
+
+select * from dept;
+
+
+-- ë¡œê·¸ì¸í•œ ê³„ì •ì´ ì†Œìœ í•œ í…Œì´ë¸” í™•ì¸
 select * from tab;
 
---- emp : »ç¿øÁ¤º¸
---- dept : ºÎ¼­Á¤º¸
---- bonus : ÀÓ½ÃÅ×ÀÌºí
---- salgrade : ±Ş¿© Å×ÀÌºí
-
--- Å×ÀÌºíÀÇ ±¸Á¶ È®ÀÎ : desc Å×ÀÌºíÀÌ¸§
-
+-- í…Œì´ë¸” êµ¬ì¡° í™•ì¸ : desc í…Œì´ë¸” ì´ë¦„
 desc emp;
 desc dept;
 desc salgrade;
 
---µ¥ÀÌÅÍ °Ë»ö ÁúÀÇ
-SELECT ename, sal, deptno, empno
-    
-FROM emp; -- Å×ÀÌºí ÀÌ¸§
-
+select * from emp;
 select * from dept;
 
-SELECT deptno
-FROM dept;
+-- ë°ì´í„° ê²€ìƒ‰ ì§ˆì˜
+select ename,sal, deptno, empno -- ì»¬ëŸ¼ ì´ë¦„ì„ ë‚˜ì—´
+from emp --í…Œì´ë¸” ì´ë¦„
+;
 
---selectÀÇ °á°ú´Â »õ·Î¿î Å×ÀÌºíÀÌ´Ù.
---ÄÃ·³ÀÇ »ê¼ú ¿¬»êÀÌ °¡´ÉÇÏ´Ù. +, -, *, /, modÇÔ¼ö ÀÌ¿ë
+select deptno from dept;
+select deptno, dname from dept;
 
-SELECT
-    *
-FROM emp;
 
-SELECT ename, sal, sal + comm
-    
-FROM emp;
-
-select ename, sal, sal + 500
+-- selectì˜ ê²°ê³¼ëŠ” ìƒˆë¡œìš´ í…Œì´ë¸”ì´ë‹¤
+-- ì»¬ëŸ¼ì˜ ì‚°ìˆ ì—°ì‚°ì´ ê°€ëŠ¥í•˜ë‹¤ . +, -, *,/ mod í•¨ìˆ˜ ì´ìš©(ë‚˜ë¨¸ì§€)
+select *from emp;
+select ename, sal,sal + comm
 from emp;
 
-select ename, sal, sal - 100
+select ename, sal, sal+500
 from emp;
 
-select ename, sal, sal * 12
+select ename, sal, sal-100
 from emp;
 
-select ename, sal, sal / 2
+select ename, sal, sal*12
 from emp;
 
--- null°ªÀÇ È®ÀÎ
-SELECT ename, job, sal, comm, SAL*12, SAL*12+COMM
-FROM emp;
-
--- null °ª Ä¡È¯ ÇÔ¼ö: nvl(ÄÃ·³¸í, ±âº»°ª)
--- ±âº»°ªÀº ÄÃ·³ÀÇ µµ¸ŞÀÎÀÇ ÀÚ·á¸í°ú °°¾Æ¾ß ÇÑ´Ù.
-
-SELECT ename, job, sal, nvl(comm,0), sal*12, sal*12+nvl(comm,0) as total+
-FROM emp;
-
--- µ¥ÀÌÅÍº£ÀÌ½ºÀÇ ¹®ÀÚ¿­ Ç¥Çö -> ÀÛÀº µû¿ÈÇ¥¸¦ ÀÌ¿ë
--- '¹®ÀÚ¿­'
--- ¹®ÀÚ¿­À» ºÙ¿©¼­ Ãâ·ÂÇÏ´Â ¿¬»ê -> ||
-
-SELECT ename || ' is a ' || job as massage
-    
-FROM emp;
-
-select ename, job from emp;
-
--- Ãâ·Â ÄÃ·³ÀÇ Áßº¹À» Á¦°ÅÇÏ°í ÇÏ³ª¾¿¸¸ Ãâ·Â: distinct
-select distinct deptno
+select ename, sal, sal/2
 from emp;
 
-SELECT distinct deptno, job
-    
-FROM emp order by deptno;
+-- null ê°’ì˜ í™•ì¸
+select ename, job, sal, comm, sal*12, sal*12+comm
+from emp;
+
+-- nvl(ì»¬ëŸ¼ëª…, ê¸°ë³¸ê°’): null ê°’ ì¹˜í™˜ í•¨ìˆ˜ 
+-- ê¸°ë³¸ê°’ì€ ì»¬ëŸ¼ì˜ ë„ë©”ì¸ì˜ ìë£Œí˜•ê³¼ ê°™ì•„ì•¼ í•œë‹¤. 
+select ename, job, sal, nvl(comm,0), sal*12 as sal_1, sal*12+nvl(comm,0) as total
+from emp;
+
+
+-- DBì˜ ë¬¸ìì—´ í‘œí˜„ -> ì‘ì€ ë”°ì˜´í‘œë¥¼ ì´ìš©
+-- EX) 'ë¬¸ìì—´'
+-- ë¬¸ìì—´ì„ ë¶™ì—¬ì„œ ì¶œë ¥í•˜ëŠ” ì—°ì‚° -> || 
+select job, ename || ' is a' || job as msg
+from emp;
+
+-- ì¶œë ¥ ì»¬ëŸ¼ì˜ ì¤‘ë³µì„ ì œê±°í•˜ê³  í•˜ë‚˜ì”©ë§Œ ì¶œë ¥ : DISTINCT
+select deptno from emp;
+select distinct deptno from emp;
+
+select deptno, job from emp order by deptno;
+select distinct deptno, job from emp order by deptno;
+
