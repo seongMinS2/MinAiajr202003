@@ -72,7 +72,7 @@ public class EmpService {
 		int deptno = sc.nextInt();
 		sc.nextLine();
 
-		String sql = "insert into emp10 values(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into emp11 values(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -125,7 +125,7 @@ public class EmpService {
 
 		System.out.println("변경하실 컬럼을 선택하세요 \n 1.이름 | 2.부서 | 3.급여");
 		selectNum = sc.nextInt();
-		sc.hasNextLine();
+		sc.nextLine();
 
 		switch (selectNum) {
 
@@ -194,7 +194,7 @@ public class EmpService {
 		case 3:
 			sql = "update emp11 set sal = ? where empno = ? ";
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("변경하실 부서번호를 입력해주세요.");
+			System.out.println("변경하실 급여를 입력해주세요.");
 			int sal = sc.nextInt();
 			sc.nextLine();
 
