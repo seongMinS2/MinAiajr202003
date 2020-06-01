@@ -2,8 +2,10 @@ package manager;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class DeptService {
@@ -16,9 +18,8 @@ public class DeptService {
 //		리스트,
 //		검색(부서이름 or 지역)
 	
-	Connection conn = MainJDBC.conn;
-	PreparedStatement pstmt = MainJDBC.pstmt;
-	Scanner sc = MainJDBC.sc;
+
+	Scanner sc = new Scanner(System.in);
 	int selectNum = 0;
 
 	// 테이블 복사부터 하고 시작함.
@@ -26,6 +27,15 @@ public class DeptService {
 	// EMP 테이블 입력(all)
 
 	public void createDept() throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("오라클드라이버 로드 성공");
+
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
+		System.out.println("데이터베이스 접속완료");
 
 		System.out.println("부서번호를 입력하세요.");
 		int deptno = sc.nextInt();
@@ -48,11 +58,30 @@ public class DeptService {
 		int rs = pstmt.executeUpdate();
 
 		System.out.println(rs + "개 행이 입력 되었습니다.");
+		
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	}
 
 	// 수정(요청:부서이름)(부서이름, 위치)
 
 	public void updateDept() throws Exception {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		System.out.println("부서이름을 입력해주세요.");
 		String dname = sc.nextLine();
 
@@ -75,6 +104,21 @@ public class DeptService {
 
 			if (count > 0)
 				System.out.println("수정이 완료 되었습니다.");
+			
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			break;
 		case 2:
@@ -90,6 +134,21 @@ public class DeptService {
 
 			if (count > 0)
 				System.out.println("수정이 완료 되었습니다.");
+			
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			break;
 
@@ -99,6 +158,10 @@ public class DeptService {
 	// delete
 
 	public void deleteDept() throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
 		System.out.println("삭제하실 부서의 부서번호 입력해주세요.");
 		int deptno = sc.nextInt();
 		sc.nextLine();
@@ -111,15 +174,33 @@ public class DeptService {
 
 		if (count > 0)
 			System.out.println("삭제가 완료 되었습니다.");
+		
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	}
 
 	// EMP 테이블의 모든 데이터를 출력
 	public void listDept() throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		String sql = "select * from dept02";
 		pstmt = conn.prepareStatement(sql);
 
-		ResultSet rs = pstmt.executeQuery(sql);
+		rs = pstmt.executeQuery(sql);
 
 		while (rs.next()) {
 			int deptno = rs.getInt(1);
@@ -128,10 +209,36 @@ public class DeptService {
 
 			System.out.println(deptno + "\t" + dname + "\t" + loc);
 		}
+		
+		if (rs != null)
+			try {
+				rs.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	}
 
 	// 검색
 	public void searchDept() throws Exception {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		System.out.println("검색 기준을 선택하세요.");
 		System.out.println("1.부서 | 2.위치");
@@ -149,7 +256,7 @@ public class DeptService {
 
 			pstmt.setString(1, searchDname);
 
-			ResultSet rs = pstmt.executeQuery(sql);
+			rs = pstmt.executeQuery(sql);
 
 			System.out.println(searchDname + "와 같은 부서이름의 리스트 입니다.");
 
@@ -160,6 +267,28 @@ public class DeptService {
 
 				System.out.println(deptno + "\t" + dname + "\t" + loc);
 			}
+			
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			break;
 
 		case 2:
@@ -183,6 +312,28 @@ public class DeptService {
 
 				System.out.println(deptno + "\t" + dname + "\t" + loc);
 			}
+			
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			break;
 		}
 	}
