@@ -26,7 +26,8 @@ public class MainJDBC {
 		EmpService eService = new EmpService();
 
 		try {
-			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
 			while (true) {
 				
 				System.out.println("관리 프로그램입니다.");

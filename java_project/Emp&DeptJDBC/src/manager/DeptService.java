@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class DeptService {
 
-//	2. 부서관리 프로그램
+//	1. 부서관리 프로그램
 //	#기능
 //		입력
 //		수정(부서이름, 위치)
@@ -29,10 +29,10 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		// 1. db 로드
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
 
-		// 2. 데이터베이스 접속
+
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		System.out.println("부서번호를 입력하세요.");
@@ -80,16 +80,16 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		// 1. db 로드
+		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		System.out.println("부서이름을 입력해주세요.");
 		String dname = sc.nextLine();
 
-		System.out.println("변경하실 컬럼을 선택하세요 \n 1.부서이름 | 2.위치");
+		System.out.println("변경하실 컬럼을 선택하세요 \n 1.부서이름 | 1.위치");
 		selectNum = sc.nextInt();
 		sc.nextLine();
 
@@ -156,10 +156,10 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		// 1. db 로드
+		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		System.out.println("삭제하실 부서의 부서번호 입력해주세요.");
@@ -187,10 +187,10 @@ public class DeptService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		// 1. db 로드
+		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		String sql = "select * from dept02";
@@ -223,11 +223,11 @@ public class DeptService {
 
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		System.out.println("검색 기준을 선택하세요.");
-		System.out.println("1.부서 | 2.위치");
+		System.out.println("1.부서 | 1.위치");
 		selectNum = sc.nextInt();
 		sc.nextLine();
 

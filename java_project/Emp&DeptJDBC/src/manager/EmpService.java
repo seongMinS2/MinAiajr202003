@@ -38,10 +38,10 @@ public class EmpService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		// 1.드라이버 로드
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		
@@ -102,9 +102,9 @@ public class EmpService {
 		PreparedStatement pstmt = null;
 		
 		// 1. 드라이버 로드
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 		
 		
@@ -112,7 +112,7 @@ public class EmpService {
 		int empno = sc.nextInt();
 		sc.nextLine();
 
-		System.out.println("변경하실 컬럼을 선택하세요 \n 1.이름 | 2.부서 | 3.급여");
+		System.out.println("변경하실 컬럼을 선택하세요 \n 1.이름 | 1.부서 | 3.급여");
 		selectNum = sc.nextInt();
 		sc.nextLine();
 
@@ -190,9 +190,9 @@ public class EmpService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 		
 		
@@ -221,9 +221,9 @@ public class EmpService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		String sql = "select * from emp10";
@@ -259,9 +259,9 @@ public class EmpService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
 
-		// 2. 데이터베이스 접속
+		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 		
 		System.out.println("검색하실 이름을 입력해주세요.");
