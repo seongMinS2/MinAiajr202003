@@ -15,10 +15,10 @@ public class DeptService {
 //		삭제(부서번호),
 //		리스트,
 //		검색(부서이름 or 지역)
-
-	Connection conn;
-	PreparedStatement pstmt;
-	Scanner sc = new Scanner(System.in);
+	
+	Connection conn = MainJDBC.conn;
+	PreparedStatement pstmt = MainJDBC.pstmt;
+	Scanner sc = MainJDBC.sc;
 	int selectNum = 0;
 
 	// 테이블 복사부터 하고 시작함.

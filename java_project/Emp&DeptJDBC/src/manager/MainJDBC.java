@@ -8,6 +8,12 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MainJDBC {
+	
+	public static Connection conn = null;
+	public static PreparedStatement pstmt = null;
+	public static ResultSet rs = null;
+	public static Scanner sc = new Scanner(System.in);
+
 
 	public static void main(String[] args) {
 //		1. 사원관리 프로그램
@@ -18,10 +24,6 @@ public class MainJDBC {
 //			리스트, 
 //			검색(이름)
 
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Scanner sc = new Scanner(System.in);
 		int selectNum = 0;
 
 		DeptService dService = new DeptService();

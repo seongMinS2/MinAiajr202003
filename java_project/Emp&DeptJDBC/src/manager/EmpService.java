@@ -15,9 +15,10 @@ public class EmpService {
 //			리스트, 
 //			검색(이름)
 
-	Connection conn;
-	PreparedStatement pstmt;
-	Scanner sc = new Scanner(System.in);
+	
+	Connection conn = MainJDBC.conn;
+	PreparedStatement pstmt = MainJDBC.pstmt;
+	Scanner sc = MainJDBC.sc;
 	int selectNum = 0;
 
 	// 테이블 복사부터 하고 시작함.
