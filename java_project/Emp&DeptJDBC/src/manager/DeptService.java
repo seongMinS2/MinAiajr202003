@@ -29,9 +29,6 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		
-
-
 		// 1. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
@@ -58,19 +55,9 @@ public class DeptService {
 		System.out.println(rs + "개 행이 입력 되었습니다.");
 
 		if (pstmt != null)
-			try {
-				pstmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			pstmt.close();
 		if (conn != null)
-			try {
-				conn.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			conn.close();
 	}
 
 	// 수정(요청:부서이름)(부서이름, 위치)
@@ -80,7 +67,6 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
 		// 1. 데이터베이스 접속
@@ -146,7 +132,6 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
 		// 1. 데이터베이스 접속
@@ -177,7 +162,6 @@ public class DeptService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
 		// 1. 데이터베이스 접속
