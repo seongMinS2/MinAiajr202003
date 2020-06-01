@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class DeptService {
-	
+
 //	2. 부서관리 프로그램
 //	#기능
 //		입력
@@ -15,15 +15,13 @@ public class DeptService {
 //		삭제(부서번호),
 //		리스트,
 //		검색(부서이름 or 지역)
-	
+
 	Connection conn;
 	PreparedStatement pstmt;
 	Scanner sc = new Scanner(System.in);
 	int selectNum = 0;
 
 	// 테이블 복사부터 하고 시작함.
-
-
 
 	// EMP 테이블 입력(all)
 
@@ -57,7 +55,6 @@ public class DeptService {
 	public void updateDept() throws Exception {
 		System.out.println("부서이름을 입력해주세요.");
 		String dname = sc.nextLine();
-		
 
 		System.out.println("변경하실 컬럼을 선택하세요 \n 1.부서이름 | 2.위치");
 		selectNum = sc.nextInt();
@@ -135,26 +132,58 @@ public class DeptService {
 
 	// 검색
 	public void searchDept() throws Exception {
-		
-		System.out.println("검색하실 부서이름을 입력해주세요.");
-		String searchDname = sc.nextLine();
-		
-		String sql = "select * from dept02 where dname = ?";
 
-		pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setString(1, searchDname);
-		
-		ResultSet rs = pstmt.executeQuery(sql);
+		System.out.println("검색 기준을 선택하세요.");
+		System.out.println("1.부서 | 2.위치");
+		selectNum = sc.nextInt();
+		sc.nextLine();
 
-		System.out.println(searchDname + "부서이름의 정보입니다.");
+		switch (selectNum) {
+		case 1:
+			System.out.println("검색하실 부서이름을 입력해주세요.");
+			String searchDname = sc.nextLine();
 
-		while (rs.next()) {
-			int deptno = rs.getInt(1);
-			String dname = rs.getString(2);
-			String loc = rs.getString(3);
+			String sql = "select * from dept02 where dname = ?";
 
-			System.out.println(deptno + "\t" + dname + "\t" + loc);
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, searchDname);
+
+			ResultSet rs = pstmt.executeQuery(sql);
+
+			System.out.println(searchDname + "와 같은 부서이름의 리스트 입니다.");
+
+			while (rs.next()) {
+				int deptno = rs.getInt(1);
+				String dname = rs.getString(2);
+				String loc = rs.getString(3);
+
+				System.out.println(deptno + "\t" + dname + "\t" + loc);
+			}
+			break;
+
+		case 2:
+			System.out.println("검색하실 위치를 입력해주세요.");
+			String searchLoc = sc.nextLine();
+
+			sql = "select * from dept02 where loc = ?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, searchLoc);
+
+			rs = pstmt.executeQuery(sql);
+
+			System.out.println(searchLoc + "와 같은 위치의 리스트 입니다.");
+
+			while (rs.next()) {
+				int deptno = rs.getInt(1);
+				String dname = rs.getString(2);
+				String loc = rs.getString(3);
+
+				System.out.println(deptno + "\t" + dname + "\t" + loc);
+			}
+			break;
 		}
 	}
 }
