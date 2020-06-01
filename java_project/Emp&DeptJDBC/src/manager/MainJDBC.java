@@ -1,4 +1,4 @@
-package emp;
+package manager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class EmpJDBC {
+public class MainJDBC {
 
 	public static void main(String[] args) {
 //		1. 사원관리 프로그램

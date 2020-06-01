@@ -1,4 +1,4 @@
-package emp;
+package manager;
 
 import java.sql.Connection;
 import java.sql.Date;
