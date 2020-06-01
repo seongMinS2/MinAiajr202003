@@ -61,7 +61,6 @@ public class EmpService {
 
 		// 입사일 생성
 		Date hireDate = new Date(new java.util.Date().getTime());
-
 		System.out.println("월급을 입력하세요.");
 		int sal = sc.nextInt();
 		sc.nextLine();
@@ -90,19 +89,9 @@ public class EmpService {
 		System.out.println(rs + "개 행이 입력 되었습니다.");
 		
 		if (pstmt != null)
-			try {
-				pstmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			pstmt.close();
 		if (conn != null)
-			try {
-				conn.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			conn.close();
 	}
 
 	// 수정(요청:사원번호)(이름,부서,급여)
@@ -144,19 +133,9 @@ public class EmpService {
 				System.out.println("수정이 완료 되었습니다.");
 			
 			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				pstmt.close();
 			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				conn.close();
 
 			break;
 		case 2:
@@ -175,19 +154,9 @@ public class EmpService {
 				System.out.println("수정이 완료 되었습니다.");
 			
 			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				pstmt.close();
 			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				conn.close();
 
 			break;
 
@@ -207,19 +176,9 @@ public class EmpService {
 				System.out.println("수정이 완료 되었습니다.");
 			
 			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				pstmt.close();
 			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				conn.close();
 
 			break;
 		}
@@ -251,19 +210,9 @@ public class EmpService {
 			System.out.println("삭제가 완료 되었습니다.");
 		
 		if (pstmt != null)
-			try {
-				pstmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			pstmt.close();
 		if (conn != null)
-			try {
-				conn.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			conn.close();
 	}
 
 	// EMP 테이블의 모든 데이터를 출력
@@ -297,26 +246,11 @@ public class EmpService {
 		}
 		
 		if (rs != null)
-			try {
-				rs.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			rs.close();
 		if (pstmt != null)
-			try {
-				pstmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			pstmt.close();
 		if (conn != null)
-			try {
-				conn.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			conn.close();
 	}
 
 	// 검색
@@ -358,25 +292,10 @@ public class EmpService {
 		}
 		
 		if (rs != null)
-			try {
-				rs.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			rs.close();
 		if (pstmt != null)
-			try {
-				pstmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			pstmt.close();
 		if (conn != null)
-			try {
-				conn.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			conn.close();
 	}
 }

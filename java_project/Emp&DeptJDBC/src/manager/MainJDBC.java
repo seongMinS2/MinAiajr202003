@@ -18,17 +18,17 @@ public class MainJDBC {
 //			리스트, 
 //			검색(이름)
 
+		
 		Scanner sc = new Scanner(System.in);
 		int selectNum = 0;
 
 		DeptService dService = new DeptService();
 		EmpService eService = new EmpService();
 
-		// 1. 드라이버 로드
 		try {
-
+			
 			while (true) {
-
+				
 				System.out.println("관리 프로그램입니다.");
 				System.out.println("1. 사원관리 | 2.부서관리");
 				selectNum = sc.nextInt();
