@@ -110,19 +110,9 @@ public class DeptService {
 				System.out.println("수정이 완료 되었습니다.");
 
 			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				pstmt.close();
 			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				conn.close();
 
 			break;
 		case 2:
