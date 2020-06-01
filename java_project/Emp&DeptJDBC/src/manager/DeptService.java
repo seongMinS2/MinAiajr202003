@@ -129,7 +129,7 @@ public class DeptService {
 		case 2:
 			sql = "update dept02 set dname = ? where loc = ? ";
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("변경하실 부서 이름을 입력해주세요.");
+			System.out.println("변경하실 부서 위치를 입력해주세요.");
 			String loc = sc.nextLine();
 
 			pstmt.setString(1, loc);
@@ -256,7 +256,6 @@ public class DeptService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		// 1. db 로드
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
 		// 2. 데이터베이스 접속

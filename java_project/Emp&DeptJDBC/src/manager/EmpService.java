@@ -271,6 +271,11 @@ public class EmpService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		String sql = "select * from emp10";
 		pstmt = conn.prepareStatement(sql);
@@ -319,6 +324,11 @@ public class EmpService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 		
 		System.out.println("검색하실 이름을 입력해주세요.");
 		String searchName = sc.nextLine();
