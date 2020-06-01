@@ -232,11 +232,9 @@ public class EmpService {
 		PreparedStatement pstmt = null;
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		System.out.println("오라클드라이버 로드 성공");
 
 		// 2. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
-		System.out.println("데이터베이스 접속완료");
 		
 		
 		System.out.println("삭제하실 사원번호를 입력해주세요.");

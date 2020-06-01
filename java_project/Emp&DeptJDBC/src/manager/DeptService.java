@@ -30,12 +30,11 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
+		// 1. db 로드
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		System.out.println("오라클드라이버 로드 성공");
 
 		// 2. 데이터베이스 접속
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
-		System.out.println("데이터베이스 접속완료");
 
 		System.out.println("부서번호를 입력하세요.");
 		int deptno = sc.nextInt();
@@ -81,6 +80,12 @@ public class DeptService {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		
+		// 1. db 로드
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 		
 		System.out.println("부서이름을 입력해주세요.");
 		String dname = sc.nextLine();
@@ -161,6 +166,11 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
+		// 1. db 로드
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 		
 		System.out.println("삭제하실 부서의 부서번호 입력해주세요.");
 		int deptno = sc.nextInt();
@@ -196,7 +206,13 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		// 1. db 로드
+		Class.forName("oracle.jdbc.driver.OracleDriver");
 
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
+		
 		String sql = "select * from dept02";
 		pstmt = conn.prepareStatement(sql);
 
@@ -239,6 +255,12 @@ public class DeptService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		// 1. db 로드
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		// 2. 데이터베이스 접속
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "tiger");
 
 		System.out.println("검색 기준을 선택하세요.");
 		System.out.println("1.부서 | 2.위치");
