@@ -18,6 +18,8 @@ public class EmpService {
 //			검색(이름)
 
 	
+	
+	
 	Scanner sc = new Scanner(System.in);
 	int selectNum = 0;
 
