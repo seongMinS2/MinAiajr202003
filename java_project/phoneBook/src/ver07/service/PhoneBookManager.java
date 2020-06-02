@@ -1,8 +1,17 @@
-package ver06;
+package ver07.service;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+
+import ver07.exception.BadNumberException;
+import ver07.exception.StringEmptyException;
+import ver07.infordfly.PhoneCafeInfo;
+import ver07.infordfly.PhoneCompanyInfo;
+import ver07.infordfly.PhoneInfor;
+import ver07.infordfly.PhoneUnivInfo;
+import ver07.veiw.MenuNum;
 
 // PhoneInfo 타입의 배열로 친구정보를
 // 저장, 수정, 삭제, 검색, 출력
@@ -12,12 +21,12 @@ public class PhoneBookManager {
 
     //private final PhoneInfor[] books;
 
-    private ArrayList<PhoneInfor> books;
+    private List<PhoneInfor> books;
 
     // 배열에 저장된 요소의 개수
     //int numOfInfo;
 
-    Scanner sc;
+    public Scanner sc;
 
     // 생성자를 통해서 배열 생성, 요소의 개수 초기화
     PhoneBookManager() {
@@ -52,7 +61,7 @@ public class PhoneBookManager {
 
 
     // 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
-    void createInfo() {
+    public void createInfo() {
 
         //객체를 저장할 info 변수와
         //입력받은 문자열을 저장할 4가지 변수 초기화
@@ -167,7 +176,7 @@ public class PhoneBookManager {
 
 
             case MenuNum.CAFE:
-                System.out.println("동호회 이름을 입력해주세요.");
+                System.out.println("동호회 이름을 입려해주세요.");
                 String cafeName = sc.nextLine();
                 System.out.println("닉네임을 입려해주세요.");
                 String nickName = sc.nextLine();
@@ -186,7 +195,7 @@ public class PhoneBookManager {
     }
 
     // 3. 배열의 데이터 출력
-    void showAllInfo() {
+    public void showAllInfo() {
 
         // for each 반복 : 현재 프로그램에서는 사용 불가
 
@@ -207,7 +216,7 @@ public class PhoneBookManager {
 
         //배열의 반복으로 name값을 비교해서 index 값을 찾는다.
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).name.equals(name)) {
+            if (books.get(i).getName().equals(name)) {
                 searchIndex = i;
                 break;
             }
@@ -215,7 +224,7 @@ public class PhoneBookManager {
         return searchIndex;
     }
 
-    void showInfo() {
+    public void showInfo() {
         System.out.println("검색하실 이름을 입력하세요.");
         String name = sc.nextLine();
 
@@ -230,7 +239,7 @@ public class PhoneBookManager {
     }
 
     // 5. 배열의 정보를 삭제 : 이름 기준
-    void deleteInfo() {
+    public void deleteInfo() {
         System.out.println("삭제하고자하는 이름을 입력해주세요.");
         String name = sc.nextLine();
 
@@ -246,7 +255,7 @@ public class PhoneBookManager {
     }
 
     // 6. 배열의 정보를 수정 : 이름 기준
-    void editInfo() {
+    public void editInfo() {
 
         System.out.println("변경하고자 하는 이름을 입력해주세요.");
         String name = sc.nextLine();
@@ -257,7 +266,7 @@ public class PhoneBookManager {
         if (index < 0) {
             System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
         } else {
-            String editName = books.get(index).name;
+            String editName = books.get(index).getName();
             System.out.println("수정 데이터 입력을 시작합니다.");
             System.out.println("이름은 " + editName + "입니다.");
             System.out.println("전화번호를 입력해주세요.");

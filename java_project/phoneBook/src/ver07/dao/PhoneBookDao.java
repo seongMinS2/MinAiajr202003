@@ -1,4 +1,4 @@
-package jdbc.daoVersion;
+package ver07.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeptDao {
-	
+import jdbc.daoVersion.ConnectionProvider;
+import jdbc.daoVersion.Dept;
+import ver07.dto.AllDTO;
+import ver07.infordfly.PhoneInfor;
+
+public class PhoneBookDao {
 	// DAO = Data Acess Object
 	// 데이터베이스 처리 하는 클래스
 	// 
@@ -20,7 +24,7 @@ public class DeptDao {
 	
 	
 
-	public int deptEdit(Dept newDept, Connection conn) {
+	public int deptEdit(/* Dept newDept, Connection conn */) {
 
 		// JDBC 사용 객체
 		//Connection conn = null;
@@ -102,7 +106,7 @@ public class DeptDao {
 
 	}
 
-	public int deptDelete(String dname) {
+	public int deptDelete(/* String dname */) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -162,7 +166,7 @@ public class DeptDao {
 
 	}
 
-	public List<Dept> deptSearch(String dname) {
+	public List<PhoneInfor> deptSearch(/* String dname */) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -171,7 +175,7 @@ public class DeptDao {
 		ResultSet rs = null;
 		
 		
-		List<Dept> list = new ArrayList<Dept>();
+		List<PhoneInfor> list = new ArrayList<PhoneInfor>();
 
 
 		try {
@@ -250,7 +254,7 @@ public class DeptDao {
 
 	}
 
-	public int deptInsert(Dept dept) {
+	public int createInfo(/* Dept dept */) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -321,27 +325,33 @@ public class DeptDao {
 
 	}
 
-	public List<Dept> deptList() {
+	public List<AllDTO> phoneBookList(Connection conn) {
 		
 		// VO : Value Object , read only , getter
 		// DTO : Data Transfer Object  getter/setter , toString, equals
 
 		// JDBC 사용 객체
-		Connection conn = null;
+		//Connection conn = null;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		// Dao 클래스 추가
-		List<Dept> deptList= new ArrayList<>();
+		List<AllDTO> allBooks = new ArrayList<>();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
 		try {
 			// 2. 데이터베이스 연결
-			conn = ConnectionProvider.getConnection();
+			//conn = ConnectionProvider.getConnection();
 
-			String sql = "select * from dept  order by dname";
+			String sql = "select *\r\n" + 
+					"from phoneinfo_basic b left outer join phoneinfo_univ y\r\n" + 
+					"on b.idx = y.fr_ref\r\n" + 
+					"left outer join phoneinfo_com c\r\n" + 
+					"on b.idx = c.fr_ref\r\n" + 
+					"left outer join phoneinfo_cafe ca\r\n" + 
+					"on b.idx = ca.fr_ref";
 
 			stmt = conn.createStatement();
 
@@ -350,12 +360,27 @@ public class DeptDao {
 			
 			while (rs.next()) {
 				
-				Dept dept = new Dept(
-						rs.getInt("deptno"), 
-						rs.getString("dname"), 
-						rs.getString("loc"));
+				AllDTO allDto = new AllDTO(
+						rs.getInt(1), 
+						rs.getString(2), 
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getDate(6),
+						rs.getInt(7),
+						rs.getString(8),
+						rs.getInt(9),
+						rs.getInt(10),
+						rs.getInt(11),
+						rs.getString(12),
+						rs.getInt(13),
+						rs.getInt(14),
+						rs.getString(15),
+						rs.getString(16),
+						rs.getInt(16)
+						);
 				
-				deptList.add(dept);
+				allBooks.add(allDto);
 				
 //				System.out.print(rs.getInt("deptno") + "\t");
 //				System.out.printf("%15s", rs.getString("dname") + "\t");
@@ -403,7 +428,7 @@ public class DeptDao {
 //			}
 
 		}
-		return deptList;
+		return allBooks;
 
 	}
 
@@ -444,7 +469,7 @@ public class DeptDao {
 	}
 	
 	
-	public Dept deptSearchName(String searchName, Connection conn) {
+	public PhoneInfor deptSearchName(String searchName, Connection conn) {
 		
 		
 		Dept dept = null;
@@ -479,20 +504,4 @@ public class DeptDao {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
-
