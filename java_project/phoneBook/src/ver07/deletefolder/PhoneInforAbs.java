@@ -1,4 +1,4 @@
-package ver07.infordfly;
+package ver07.deletefolder;
 
 public abstract class PhoneInforAbs {
     // private : 변수의 직접 참조를 막는다, 정보은닉

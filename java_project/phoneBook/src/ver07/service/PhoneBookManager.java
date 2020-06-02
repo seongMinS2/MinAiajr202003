@@ -10,16 +10,16 @@ import jdbc.daoVersion.Dept;
 import jdbc.daoVersion.ManageMain;
 import ver07.ConnectionProvider;
 import ver07.dao.PhoneBookDao;
+import ver07.deletefolder.PhoneCafeInfo;
+import ver07.deletefolder.PhoneCompanyInfo;
+import ver07.deletefolder.PhoneInfor;
+import ver07.deletefolder.PhoneUnivInfo;
 import ver07.dto.AllDTO;
 import ver07.dto.CafeDTO;
 import ver07.dto.CompanyDTO;
 import ver07.dto.UnivDTO;
 import ver07.exception.BadNumberException;
 import ver07.exception.StringEmptyException;
-import ver07.infordfly.PhoneCafeInfo;
-import ver07.infordfly.PhoneCompanyInfo;
-import ver07.infordfly.PhoneInfor;
-import ver07.infordfly.PhoneUnivInfo;
 import ver07.veiw.MenuNum;
 
 // PhoneInfo 타입의 배열로 친구정보를

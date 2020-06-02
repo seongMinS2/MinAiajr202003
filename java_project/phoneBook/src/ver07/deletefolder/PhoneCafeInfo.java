@@ -1,4 +1,4 @@
-package ver07.infordfly;
+package ver07.deletefolder;
 
 public class PhoneCafeInfo  extends PhoneInfor implements Info {
 
