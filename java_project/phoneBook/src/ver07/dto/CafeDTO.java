@@ -19,6 +19,16 @@ public class CafeDTO {
 	public CafeDTO() {}
 	
 	
+	public CafeDTO(String name, String phoneNumber, String addr, String email, String cafaName, String nicName) {
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.addr = addr;
+		this.email = email;
+		this.cafaName = cafaName;
+		this.nicName = nicName;
+	}
+
+
 	public CafeDTO(int idx1, String name, String phoneNumber, String addr, String email, Date regdate, int idx4,
 			String cafaName, String nicName, int idx5) {
 		this.idx1 = idx1;

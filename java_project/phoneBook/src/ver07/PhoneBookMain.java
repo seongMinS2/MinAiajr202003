@@ -44,19 +44,22 @@ public class PhoneBookMain {
 
             switch (select) {
                 case MenuNum.CREATE:
-                    manager.createInfo();
+                    manager.createInfo();	// 생성 완료
                     break;
                 case MenuNum.SEARCH:
-                    manager.showInfo();
+                    manager.showInfo();  // 내부표기로 변환할 수 없음, 동호회쪽 손봐야함
                     break;
                 case MenuNum.DELETE:
-                    manager.deleteInfo();
+                    manager.deleteInfo();	// 삭제 완료
                     break;
                 case MenuNum.EDIT:
-                    manager.editInfo();
+                    //manager.editInfo();
                     break;
                 case MenuNum.SHOW_ALL:
-                    manager.();
+                    //manager.showAllInfo();	// 전체 출력 완료
+                	//manager.showCafeInfo();	// 동호회 출력 완료
+                	//manager.showCompanyInfo();  // 회사 출력 완료
+                	manager.showUnivInfo();		//학교 출력 완료
                     break;
                 case MenuNum.EXIT:
                     break;

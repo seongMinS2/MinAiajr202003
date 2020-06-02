@@ -15,6 +15,18 @@ public class CompanyDTO {
 	
 	public CompanyDTO() {}
 	
+	
+	
+	public CompanyDTO(String name, String phoneNumber, String addr, String email, String company) {
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.addr = addr;
+		this.email = email;
+		this.company = company;
+	}
+
+
+
 	public CompanyDTO(int idx1, String name, String phoneNumber, String addr, String email, Date regdate, int idx3,
 			String company, int ref2) {
 		this.idx1 = idx1;
