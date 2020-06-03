@@ -13,6 +13,70 @@ import ver07.dto.UnivDTO;
 
 public class UnivDao {
 	
+	//학교 친구 기본 정보 테이블 수정
+			public int basicEdit(UnivDTO univ, Connection conn) {
+
+				// JDBC 사용 객체
+				// Connection conn = null;
+				Statement stmt = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				int resultCnt = 0;
+
+				try {
+					// Connection 객체 생성
+					// conn = ConnectionProvider.getConnection();
+
+					// 3. SQL 처리
+					// Statement or PreparedStatement
+					// pstmt = conn.prepareStatement(SQL 문장)
+
+					// 주의 !!!!!
+					// 입력된 수정하고자 하는 이름의 데이터가 존재해야 수정 데이터 입력이 시작시킵니다.
+					// 그리고 이름의 데이터는 유일조건이 있어야 합니다.
+					// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
+					// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
+
+					String sql = "update phoneinfo_basic  set fr_name = ? , fr_phonenumber = ? , fr_email = ? , fr_address = ? where fr_name=?";
+
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setString(1, univ.getName());
+					pstmt.setString(2, univ.getPhoneNumber());
+					pstmt.setString(3, univ.getEmail());
+					pstmt.setString(4, univ.getAddr());
+					pstmt.setString(5, univ.getName());
+
+					resultCnt = pstmt.executeUpdate();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+
+					if (stmt != null) {
+						try {
+							stmt.close();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+
+				}
+
+				return resultCnt;
+
+			}
+	
 	//학교 친구 수정
 	public int univEdit(UnivDTO univ, Connection conn) {
 
@@ -37,21 +101,9 @@ public class UnivDao {
 			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
 			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
 
-			String sql1 = "update phoneinfo_basic  set fr_name = ? , fr_phonenumber = ? , fr_email = ? , fr_address = ? where fr_name=?";
+			String sql = "update phoneinfo_cafe  set fr_c_cafename = ? , fr_nicname = ? where fr_reff=?";
 
-			pstmt = conn.prepareStatement(sql1);
-
-			pstmt.setString(1, univ.getName());
-			pstmt.setString(2, univ.getPhoneNumber());
-			pstmt.setString(3, univ.getEmail());
-			pstmt.setString(4, univ.getAddr());
-			pstmt.setString(5, univ.getName());
-
-			resultCnt = pstmt.executeUpdate();
-
-			String sql2 = "update phoneinfo_cafe  set fr_c_cafename = ? , fr_nicname = ? where fr_reff=?";
-
-			pstmt = conn.prepareStatement(sql2);
+			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, univ.getMajor());
 			pstmt.setInt(2, univ.getYear());
@@ -62,16 +114,6 @@ public class UnivDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			// 4. 데이터베이스 연결 종료
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
 
 			if (stmt != null) {
 				try {
@@ -308,15 +350,58 @@ public class UnivDao {
 		return checkNull;
 
 	}
+	
+	// 학교 친구 기본 정보 입력
+		public int univBasicInsert(UnivDTO univ, Connection conn) {
+
+			// JDBC 사용 객체
+			// Connection conn = null;
+			PreparedStatement pstmt = null;
+			int resultCnt = 0;
+
+			try {
+
+				// Connection 객체 생성
+				conn = ConnectionProvider.getConnection();
+
+				// 3. SQL 처리
+				// Statement or PreparedStatement
+				// pstmt = conn.prepareStatement(SQL 문장)
+
+				String sql = "insert into phoneinfo_basic values (PB_BASIC_IDX_SEQ.nextval, ?, ?, ?, ?, ?)";
+
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, univ.getName());
+				pstmt.setString(2, univ.getPhoneNumber());
+				pstmt.setString(3, univ.getAddr());
+				pstmt.setString(4, univ.getEmail());
+				pstmt.setDate(5, univ.getRegdate());
+
+				resultCnt = pstmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+
+			}
+
+			return resultCnt;
+
+		}
 
 	// 학교 친구 입력
 	public int univInsert(UnivDTO univ, Connection conn) {
 
-		// JDBC 사용 객체
-		// Connection conn = null;
-		Statement stmt = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultCnt = 0;
 
 		try {
@@ -324,24 +409,9 @@ public class UnivDao {
 			// Connection 객체 생성
 			conn = ConnectionProvider.getConnection();
 
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
+			String sql = "insert into phoneinfo_univ values (PB_UNIV_IDX_SEQ.nextval, ?, ?, PB_BASIC_IDX_SEQ.currval)";
 
-			String sql1 = "insert into phoneinfo_basic values (PB_BASIC_IDX_SEQ.nextval, ?, ?, ?, ?, ?)";
-			String sql2 = "insert into phoneinfo_univ values (PB_UNIV_IDX_SEQ.nextval, ?, ?, PB_BASIC_IDX_SEQ.currval)";
-
-			pstmt = conn.prepareStatement(sql1);
-			pstmt.setString(1, univ.getName());
-			pstmt.setString(2, univ.getPhoneNumber());
-			pstmt.setString(3, univ.getAddr());
-			pstmt.setString(4, univ.getEmail());
-			pstmt.setDate(5, univ.getRegdate());
-
-			resultCnt = pstmt.executeUpdate();
-
-			// 두번 사용해도 괜찬은가 모르겟네
-			pstmt = conn.prepareStatement(sql2);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, univ.getMajor());
 			pstmt.setInt(2, univ.getYear());
 
@@ -350,16 +420,6 @@ public class UnivDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			// 4. 데이터베이스 연결 종료
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
 
 			if (pstmt != null) {
 				try {

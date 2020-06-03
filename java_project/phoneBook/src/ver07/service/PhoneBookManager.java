@@ -28,8 +28,7 @@ public class PhoneBookManager {
 	public CompanyDao cDao = new CompanyDao();
 	public CafeDao caDao = new CafeDao();
 	public UnivDao uDao = new UnivDao();
-	
-	
+
 	public CafeDTO cafe = null;
 	public UnivDTO univ = null;
 	public CompanyDTO com = null;
@@ -67,6 +66,8 @@ public class PhoneBookManager {
 
 		try {
 			conn = ConnectionProvider.getConnection();
+			
+			conn.setAutoCommit(false);
 
 			// 객체를 저장할 info 변수와
 			// 입력받은 문자열을 저장할 4가지 변수 초기화
@@ -160,7 +161,8 @@ public class PhoneBookManager {
 				// 2.2.3 대학 클래스로 인스턴스 생성
 				info = new UnivDTO(name, phoneNumber, addr, email, major, year);
 
-				int resultCnt = uDao.univInsert(info, conn);
+				int resultCnt = uDao.univBasicInsert(info, conn);
+					resultCnt += uDao.univInsert(info, conn);
 
 				if (resultCnt > 1) {
 					System.out.println("정상적으로 입력 되었습니다.");
@@ -169,14 +171,6 @@ public class PhoneBookManager {
 					System.out.println("입력이 되지않았습니다. 확인후 재 시도해주세요.");
 				}
 
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
 				break;
 
 			case MenuNum.COMPANY:
@@ -190,7 +184,8 @@ public class PhoneBookManager {
 				// 2.2.4 회사 클래스로 인스턴스 생성
 				info3 = new CompanyDTO(name, phoneNumber, addr, email, company);
 
-				resultCnt = cDao.companyInsert(info3, conn);
+				resultCnt = cDao.companyBasicInsert(info3, conn);
+				resultCnt += cDao.companyInsert(info3, conn);
 
 				if (resultCnt > 1) {
 					System.out.println("정상적으로 입력 되었습니다.");
@@ -199,14 +194,6 @@ public class PhoneBookManager {
 					System.out.println("입력이 되지않았습니다. 확인후 재 시도해주세요.");
 				}
 
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
 				break;
 
 			case MenuNum.CAFE:
@@ -218,7 +205,8 @@ public class PhoneBookManager {
 				// 2.2.5 동호회 클래스로 인스턴스 생성
 				info2 = new CafeDTO(name, phoneNumber, addr, email, cafeName, nickName);
 
-				resultCnt = caDao.cafeInsert(info2, conn);
+				resultCnt = caDao.cafeBasicInsert(info2, conn);
+				resultCnt += caDao.cafeInsert(info2, conn);
 
 				if (resultCnt > 1) {
 					System.out.println("정상적으로 입력 되었습니다.");
@@ -227,21 +215,23 @@ public class PhoneBookManager {
 					System.out.println("입력이 되지않았습니다. 확인후 재 시도해주세요.");
 				}
 
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-
 				break;
 			}
+			
+			conn.commit();
 
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
 
 	}
@@ -586,13 +576,14 @@ public class PhoneBookManager {
 
 					univ = new UnivDTO(name, phoneNumber, addr, email, major, grade);
 
-					int resultCnt = uDao.univEdit(univ, conn);
+					int resultCnt = uDao.basicEdit(univ, conn);
+					resultCnt += uDao.univEdit(univ, conn);
 
-					if (resultCnt > 0) {
+					if (resultCnt > 1) {
 						System.out.println("정상적으로 수정 되었습니다.");
 						System.out.println(resultCnt + "행이 수정되었습니다.");
 					}
-					
+
 				} else if (comNull == true) {
 					CompanyDTO comInfo = cDao.companySearch(name, conn);
 					System.out.println("수정 데이터 입력을 시작합니다.");
@@ -609,8 +600,9 @@ public class PhoneBookManager {
 					com = new CompanyDTO(name, phoneNumber, addr, email, company);
 
 					int resultCnt = cDao.companyEdit(com, conn);
+					resultCnt += cDao.companyEdit(com, conn);
 
-					if (resultCnt > 0) {
+					if (resultCnt > 1) {
 						System.out.println("정상적으로 수정 되었습니다.");
 						System.out.println(resultCnt + "행이 수정되었습니다.");
 					}
@@ -632,8 +624,9 @@ public class PhoneBookManager {
 					cafe = new CafeDTO(name, phoneNumber, addr, email, cafeName, nicName);
 
 					int resultCnt = caDao.cafeEdit(cafe, conn);
+					resultCnt += caDao.cafeEdit(cafe, conn);
 
-					if (resultCnt > 0) {
+					if (resultCnt > 1) {
 						System.out.println("정상적으로 수정 되었습니다.");
 						System.out.println(resultCnt + "행이 수정되었습니다.");
 					}
@@ -644,15 +637,22 @@ public class PhoneBookManager {
 			conn.commit();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					System.out.println("rollback 에러!!");
+					e1.printStackTrace();
+				}
+				e.printStackTrace();
+			}
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (SQLException e) {
+					System.out.println("close 에러!!");
+					e.printStackTrace();
 				}
 			}
 		}
