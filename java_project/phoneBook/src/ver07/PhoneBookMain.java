@@ -47,7 +47,7 @@ public class PhoneBookMain {
                     manager.createInfo();	// 생성 완료
                     break;
                 case MenuNum.SEARCH:
-                    manager.showInfo();  // 내부표기로 변환할 수 없음, 동호회쪽 손봐야함
+                    manager.showInfo();  // 검색 완료
                     break;
                 case MenuNum.DELETE:
                     manager.deleteInfo();	// 삭제 완료
