@@ -100,7 +100,7 @@ public class UnivDao {
 
 		try {
 
-			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where fr_name  like '%'||?||'%'";
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_univ u on b.idx = u.fr_ref where fr_name  like '%'||?||'%'";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -149,7 +149,7 @@ public class UnivDao {
 
 		try {
 
-			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where fr_name  like '%'||?||'%'";
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_univ u on b.idx = u.fr_ref where fr_name  like '%'||?||'%'";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -198,7 +198,7 @@ public class UnivDao {
 
 		try {
 
-			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where fr_name  like '%'||?||'%'";
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_univ u on b.idx = u.fr_ref where fr_name  like '%'||?||'%'";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
