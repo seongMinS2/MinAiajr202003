@@ -195,23 +195,8 @@ public class CafeDao {
 
 		try {
 
-			// 2. 데이터베이스 연결
-			// Connection 객체 생성
-			conn = ConnectionProvider.getConnection();
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
-			// Mysql
-			// "SELECT * FROM dept WHERE dname LIKE ?"
-			// psmt.setString(1, "%"+name+"%");
-
-			// Oracle
-			// select * from dept where dname like '%'||?||'%'
 
 			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where  fr_name  like '%'||?||'%'";
-			// String sql = "select * from dept where dname=?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -221,15 +206,11 @@ public class CafeDao {
 				checkNull = true;
 			}
 
-			// 4. 데이터베이스 연결 종료
-			// pstmt.close();
-			// conn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
-			// 4. 데이터베이스 연결 종료
 			if (rs != null) {
 				try {
 					rs.close();
