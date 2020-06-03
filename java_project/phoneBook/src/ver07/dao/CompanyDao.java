@@ -16,23 +16,10 @@ public class CompanyDao {
 	
 	public int companyBasicEdit(CompanyDTO com, Connection conn) {
 
-		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
 
 		try {
-			// Connection 객체 생성
-			// conn = ConnectionProvider.getConnection();
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
-			// 주의 !!!!!
-			// 입력된 수정하고자 하는 이름의 데이터가 존재해야 수정 데이터 입력이 시작시킵니다.
-			// 그리고 이름의 데이터는 유일조건이 있어야 합니다.
-			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
-			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
 
 			String sql = "update phoneinfo_basic  set fr_name = ?, fr_phonenumber = ?, fr_email = ?, fr_address = ? where fr_name=?";
 
@@ -67,23 +54,10 @@ public class CompanyDao {
 
 	public int companyEdit(CompanyDTO com, Connection conn) {
 
-		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
 
 		try {
-			// Connection 객체 생성
-			// conn = ConnectionProvider.getConnection();
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
-			// 주의 !!!!!
-			// 입력된 수정하고자 하는 이름의 데이터가 존재해야 수정 데이터 입력이 시작시킵니다.
-			// 그리고 이름의 데이터는 유일조건이 있어야 합니다.
-			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
-			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
 
 			String sql = "update phoneinfo_com  set fr_c_company = ? where fr_ref=?";
 
@@ -116,8 +90,6 @@ public class CompanyDao {
 	// 회사 친구 검색
 	public CompanyDTO companySearch(String name, Connection conn) {
 
-		// JDBC 사용 객체
-		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -125,23 +97,8 @@ public class CompanyDao {
 
 		try {
 
-			// 2. 데이터베이스 연결
-			// Connection 객체 생성
-			conn = ConnectionProvider.getConnection();
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
-			// Mysql
-			// "SELECT * FROM dept WHERE dname LIKE ?"
-			// psmt.setString(1, "%"+name+"%");
-
-			// Oracle
-			// select * from dept where dname like '%'||?||'%'
 
 			String sql = "select * from phoneinfo_basic b inner join phoneinfo_com c on b.idx = c.fr_ref  where  fr_name  like '%'||?||'%'";
-			// String sql = "select * from dept where dname=?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -152,15 +109,10 @@ public class CompanyDao {
 						rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
 			}
 
-			// 4. 데이터베이스 연결 종료
-			// pstmt.close();
-			// conn.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
-			// 4. 데이터베이스 연결 종료
 			if (rs != null) {
 				try {
 					rs.close();
@@ -189,32 +141,14 @@ public class CompanyDao {
 	public List<CompanyDTO> companySearchList(String name, Connection conn) {
 
 		// JDBC 사용 객체
-		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		boolean checkNull = false;
 
 		List<CompanyDTO> comList = new ArrayList<CompanyDTO>();
 
 		try {
 
-			// 2. 데이터베이스 연결
-			// Connection 객체 생성
-			conn = ConnectionProvider.getConnection();
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
-			// Mysql
-			// "SELECT * FROM dept WHERE dname LIKE ?"
-			// psmt.setString(1, "%"+name+"%");
-
-			// Oracle
-			// select * from dept where dname like '%'||?||'%'
-
 			String sql = "select * from phoneinfo_basic b inner join phoneinfo_com c on b.idx = c.fr_ref  where  fr_name  like '%'||?||'%'";
-			// String sql = "select * from dept where dname=?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -225,15 +159,10 @@ public class CompanyDao {
 						rs.getString(5), rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getInt(9)));
 			}
 
-			// 4. 데이터베이스 연결 종료
-			// pstmt.close();
-			// conn.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
-			// 4. 데이터베이스 연결 종료
 			if (rs != null) {
 				try {
 					rs.close();
@@ -261,31 +190,13 @@ public class CompanyDao {
 	// 회사 친구 검색(boolean)
 	public boolean companySearchBool(String name, Connection conn) {
 
-		// JDBC 사용 객체
-		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean checkNull = false;
 
 		try {
 
-			// 2. 데이터베이스 연결
-			// Connection 객체 생성
-			conn = ConnectionProvider.getConnection();
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
-			// Mysql
-			// "SELECT * FROM dept WHERE dname LIKE ?"
-			// psmt.setString(1, "%"+name+"%");
-
-			// Oracle
-			// select * from dept where dname like '%'||?||'%'
-
 			String sql = "select * from phoneinfo_basic b inner join phoneinfo_com c on b.idx = c.fr_ref  where  fr_name  like '%'||?||'%'";
-			// String sql = "select * from dept where dname=?";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -295,15 +206,10 @@ public class CompanyDao {
 				checkNull = true;
 			}
 
-			// 4. 데이터베이스 연결 종료
-			// pstmt.close();
-			// conn.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
-			// 4. 데이터베이스 연결 종료
 			if (rs != null) {
 				try {
 					rs.close();
@@ -336,13 +242,6 @@ public class CompanyDao {
 			int resultCnt = 0;
 
 			try {
-
-				// Connection 객체 생성
-				conn = ConnectionProvider.getConnection();
-
-				// 3. SQL 처리
-				// Statement or PreparedStatement
-				// pstmt = conn.prepareStatement(SQL 문장)
 
 				String sql = "insert into phoneinfo_basic values (PB_BASIC_IDX_SEQ.nextval, ?, ?, ?, ?, ?)";
 
@@ -383,9 +282,6 @@ public class CompanyDao {
 
 		try {
 
-			// Connection 객체 생성
-			conn = ConnectionProvider.getConnection();
-
 			String sql = "insert into phoneinfo_com values (PB_UNIV_IDX_SEQ.nextval, ?, PB_BASIC_IDX_SEQ.currval)";
 
 			pstmt = conn.prepareStatement(sql);
@@ -416,24 +312,15 @@ public class CompanyDao {
 	// 회사 친구 출력
 	public List<CompanyDTO> companyList(Connection conn) {
 
-		// VO : Value Object , read only , getter
-		// DTO : Data Transfer Object getter/setter , toString, equals
-
-		// JDBC 사용 객체
-		// Connection conn = null;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		// Dao 클래스 추가
 		List<CompanyDTO> companyBooks = new ArrayList<>();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
 		try {
-			// 2. 데이터베이스 연결
-			// conn = ConnectionProvider.getConnection();
-
 			String sql = "select * from phoneinfo_basic b join phoneinfo_com c on b.idx = c.fr_ref";
 
 			stmt = conn.createStatement();
@@ -455,7 +342,6 @@ public class CompanyDao {
 			e.printStackTrace();
 		} finally {
 
-			// 4. 데이터베이스 연결 종료
 			if (rs != null) {
 				try {
 					rs.close();

@@ -56,10 +56,10 @@ public class PhoneBookMain {
                     manager.editInfo(); 	// 수정 완료
                     break;
                 case MenuNum.SHOW_ALL:
-                    //manager.showAllInfo();	// 전체 출력 완료
+                    manager.showAllInfo();	// 전체 출력 완료
                 	//manager.showCafeInfo();	// 동호회 출력 완료
                 	//manager.showCompanyInfo();  // 회사 출력 완료
-                	manager.showUnivInfo();		//학교 출력 완료
+                	//manager.showUnivInfo();		//학교 출력 완료
                     break;
                 case MenuNum.EXIT:
                     break;
