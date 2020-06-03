@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import ver07.ConnectionProvider;
+import ver07.dao.CafeDao;
+import ver07.dao.CompanyDao;
 import ver07.dao.PhoneBookDao;
+import ver07.dao.UnivDao;
 import ver07.deletefolder.PhoneInfor;
 import ver07.dto.AllDTO;
 import ver07.dto.CafeDTO;
@@ -22,6 +25,11 @@ import ver07.veiw.MenuNum;
 public class PhoneBookManager {
 
 	public PhoneBookDao dao = new PhoneBookDao();
+	public CompanyDao cDao = new CompanyDao();
+	public CafeDao caDao = new CafeDao();
+	public UnivDao uDao = new UnivDao();
+	
+	
 	public CafeDTO cafe = null;
 	public UnivDTO univ = null;
 	public CompanyDTO com = null;
@@ -152,7 +160,7 @@ public class PhoneBookManager {
 				// 2.2.3 대학 클래스로 인스턴스 생성
 				info = new UnivDTO(name, phoneNumber, addr, email, major, year);
 
-				int resultCnt = dao.univInsert(info, conn);
+				int resultCnt = uDao.univInsert(info, conn);
 
 				if (resultCnt > 1) {
 					System.out.println("정상적으로 입력 되었습니다.");
@@ -182,7 +190,7 @@ public class PhoneBookManager {
 				// 2.2.4 회사 클래스로 인스턴스 생성
 				info3 = new CompanyDTO(name, phoneNumber, addr, email, company);
 
-				resultCnt = dao.companyInsert(info3, conn);
+				resultCnt = cDao.companyInsert(info3, conn);
 
 				if (resultCnt > 1) {
 					System.out.println("정상적으로 입력 되었습니다.");
@@ -210,7 +218,7 @@ public class PhoneBookManager {
 				// 2.2.5 동호회 클래스로 인스턴스 생성
 				info2 = new CafeDTO(name, phoneNumber, addr, email, cafeName, nickName);
 
-				resultCnt = dao.cafeInsert(info2, conn);
+				resultCnt = caDao.cafeInsert(info2, conn);
 
 				if (resultCnt > 1) {
 					System.out.println("정상적으로 입력 되었습니다.");
@@ -298,7 +306,7 @@ public class PhoneBookManager {
 		try {
 			conn = ConnectionProvider.getConnection();
 
-			List<CafeDTO> allList = dao.cafeList(conn);
+			List<CafeDTO> allList = caDao.cafeList(conn);
 
 			System.out.println("전체 정보를 출력합니다. ================");
 
@@ -342,7 +350,7 @@ public class PhoneBookManager {
 		try {
 			conn = ConnectionProvider.getConnection();
 
-			List<CompanyDTO> allList = dao.companyList(conn);
+			List<CompanyDTO> allList = cDao.companyList(conn);
 
 			System.out.println("전체 정보를 출력합니다. ================");
 
@@ -385,7 +393,7 @@ public class PhoneBookManager {
 		try {
 			conn = ConnectionProvider.getConnection();
 
-			List<UnivDTO> allList = dao.univList(conn);
+			List<UnivDTO> allList = uDao.univList(conn);
 
 			System.out.println("전체 정보를 출력합니다. ================");
 
@@ -435,9 +443,9 @@ public class PhoneBookManager {
 			System.out.println("검색하고자 하는 이름 : ");
 			String searchName = sc.nextLine();
 
-			List<CafeDTO> list1 = dao.cafeSearchList(searchName, conn);
-			List<UnivDTO> list2 = dao.univSearchList(searchName, conn);
-			List<CompanyDTO> list3 = dao.companySearchList(searchName, conn);
+			List<CafeDTO> list1 = caDao.cafeSearchList(searchName, conn);
+			List<UnivDTO> list2 = uDao.univSearchList(searchName, conn);
+			List<CompanyDTO> list3 = cDao.companySearchList(searchName, conn);
 
 			System.out.println("동호회 친구 중 검색 결과");
 			System.out.println("======================================");
@@ -551,9 +559,9 @@ public class PhoneBookManager {
 			System.out.println("변경하고자 하는 이름을 입력해주세요.");
 			String name = sc.nextLine();
 
-			cafeNull = dao.cafeSearchBool(name, conn);
-			univNull = dao.univSearchBool(name, conn);
-			comNull = dao.companySearchBool(name, conn);
+			cafeNull = caDao.cafeSearchBool(name, conn);
+			univNull = uDao.univSearchBool(name, conn);
+			comNull = cDao.companySearchBool(name, conn);
 
 			if (cafeNull == false && univNull == false && comNull == false) {
 				System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
@@ -561,7 +569,7 @@ public class PhoneBookManager {
 
 				// 저장된 인스턴스가 : 대학, 회사, 동호회
 				if (univNull == true) {
-					UnivDTO univInfo = dao.univSearch(name, conn);
+					UnivDTO univInfo = uDao.univSearch(name, conn);
 					System.out.println("수정 데이터 입력을 시작합니다.");
 					System.out.println("이름은 " + univInfo.getName() + "입니다.");
 					System.out.println("전화번호를 입력해주세요.");
@@ -578,7 +586,7 @@ public class PhoneBookManager {
 
 					univ = new UnivDTO(name, phoneNumber, addr, email, major, grade);
 
-					int resultCnt = dao.univEdit(univ, conn);
+					int resultCnt = uDao.univEdit(univ, conn);
 
 					if (resultCnt > 0) {
 						System.out.println("정상적으로 수정 되었습니다.");
@@ -586,7 +594,7 @@ public class PhoneBookManager {
 					}
 					
 				} else if (comNull == true) {
-					CompanyDTO comInfo = dao.companySearch(name, conn);
+					CompanyDTO comInfo = cDao.companySearch(name, conn);
 					System.out.println("수정 데이터 입력을 시작합니다.");
 					System.out.println("이름은 " + comInfo.getName() + "입니다.");
 					System.out.println("전화번호를 입력해주세요.");
@@ -600,14 +608,14 @@ public class PhoneBookManager {
 
 					com = new CompanyDTO(name, phoneNumber, addr, email, company);
 
-					int resultCnt = dao.companyEdit(com, conn);
+					int resultCnt = cDao.companyEdit(com, conn);
 
 					if (resultCnt > 0) {
 						System.out.println("정상적으로 수정 되었습니다.");
 						System.out.println(resultCnt + "행이 수정되었습니다.");
 					}
 				} else if (cafeNull = true) {
-					CafeDTO cafeInfo = dao.cafeSearch(name, conn);
+					CafeDTO cafeInfo = caDao.cafeSearch(name, conn);
 					System.out.println("수정 데이터 입력을 시작합니다.");
 					System.out.println("이름은 " + cafeInfo.getName() + "입니다.");
 					System.out.println("전화번호를 입력해주세요.");
@@ -623,7 +631,7 @@ public class PhoneBookManager {
 
 					cafe = new CafeDTO(name, phoneNumber, addr, email, cafeName, nicName);
 
-					int resultCnt = dao.cafeEdit(cafe, conn);
+					int resultCnt = caDao.cafeEdit(cafe, conn);
 
 					if (resultCnt > 0) {
 						System.out.println("정상적으로 수정 되었습니다.");
