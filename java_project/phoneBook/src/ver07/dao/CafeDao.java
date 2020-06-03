@@ -8,10 +8,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ver07.ConnectionProvider;
 import ver07.dto.CafeDTO;
 
 public class CafeDao {
+	
+	private CafeDao() {	}
+	
+	private static CafeDao dao = new CafeDao();
+	
+	public static CafeDao getInstance() {
+		return dao;
+	}
 
 	public int cafeBasicEdit(CafeDTO newCafe, Connection conn) throws SQLException {
 

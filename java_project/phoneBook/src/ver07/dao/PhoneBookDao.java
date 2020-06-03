@@ -8,23 +8,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ver07.ConnectionProvider;
 import ver07.dto.AllDTO;
-import ver07.dto.CafeDTO;
-import ver07.dto.CompanyDTO;
-import ver07.dto.UnivDTO;
 
 public class PhoneBookDao {
-	// DAO = Data Acess Object
-	// 데이터베이스 처리 하는 클래스
-	//
-
-	// MVC -> Model, View, Controller
-	// model -> Service , Dao
-	// 데이터베이스
 	
+	private PhoneBookDao() {}
 	
+	private static PhoneBookDao dao = new PhoneBookDao();
 	
+	public static PhoneBookDao getInstance() {
+		return dao;
+	}
 	
 
 	// 삭제

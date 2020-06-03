@@ -8,11 +8,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ver07.ConnectionProvider;
 import ver07.dto.CompanyDTO;
-import ver07.dto.UnivDTO;
 
 public class CompanyDao {
+	
+	private CompanyDao() {}
+	
+	private static CompanyDao dao = new CompanyDao();
+	
+	public static CompanyDao getInstance() {
+		return dao;
+	}
 	
 	public int companyBasicEdit(CompanyDTO com, Connection conn) throws SQLException {
 

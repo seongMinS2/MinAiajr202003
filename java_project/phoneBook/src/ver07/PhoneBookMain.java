@@ -8,11 +8,11 @@ import ver07.veiw.Menu;
 import ver07.veiw.MenuNum;
 
 public class PhoneBookMain {
-    public static void main(String[] args) {
-
-        //PhoneBookManager manager = new PhoneBookManager(100);
+    public static void main(String[] args) throws ClassNotFoundException {
+    	
         PhoneBookManager manager = PhoneBookManager.getInstance();
-
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        
         while (true) {
             Menu.showMenu();
 

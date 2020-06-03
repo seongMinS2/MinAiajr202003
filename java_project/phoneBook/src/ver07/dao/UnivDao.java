@@ -8,10 +8,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ver07.ConnectionProvider;
 import ver07.dto.UnivDTO;
 
 public class UnivDao {
+	
+	private UnivDao() {
+	}
+	
+	private static UnivDao dao = new UnivDao();
+	
+	public static UnivDao getInstance() {
+		return dao;
+	}
 	
 	//학교 친구 기본 정보 테이블 수정
 			public int basicEdit(UnivDTO univ, Connection conn) throws SQLException {

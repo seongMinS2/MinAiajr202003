@@ -24,10 +24,10 @@ import ver07.veiw.MenuNum;
 // 저장, 수정, 삭제, 검색, 출력
 public class PhoneBookManager {
 
-	public PhoneBookDao dao = new PhoneBookDao();
-	public CompanyDao cDao = new CompanyDao();
-	public CafeDao caDao = new CafeDao();
-	public UnivDao uDao = new UnivDao();
+	public PhoneBookDao dao = PhoneBookDao.getInstance();
+	public CompanyDao cDao = CompanyDao.getInstance();
+	public CafeDao caDao = CafeDao.getInstance();
+	public UnivDao uDao = UnivDao.getInstance();
 
 	public CafeDTO cafe = null;
 	public UnivDTO univ = null;
