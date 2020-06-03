@@ -22,10 +22,8 @@ public class PhoneBookDao {
 	// MVC -> Model, View, Controller
 	// model -> Service , Dao
 	// 데이터베이스
-	
-	
 
-	public int phhoneBookEdit(/* Dept newDept, Connection conn */) {
+	public int companyEdit(CompanyDTO com, Connection conn) {
 
 		// JDBC 사용 객체
 		// Connection conn = null;
@@ -48,14 +46,24 @@ public class PhoneBookDao {
 			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
 			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
 
-			String sql = "update dept  set  dname=?, loc=? " + " where deptno=?";
+			String sql1 = "update phoneinfo_basic  set fr_name = ?, fr_phonenumber = ?, fr_email = ?, fr_address = ? where fr_name=?";
 
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql1);
 
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, newDept.getDname());
-			pstmt.setString(2, newDept.getLoc());
-			pstmt.setInt(3, newDept.getDeptno());
+			pstmt.setString(1, com.getName());
+			pstmt.setString(2, com.getPhoneNumber());
+			pstmt.setString(3, com.getEmail());
+			pstmt.setString(4, com.getAddr());
+			pstmt.setString(5, com.getName());
+
+			resultCnt = pstmt.executeUpdate();
+
+			String sql2 = "update phoneinfo_com  set fr_c_company = ? where fr_ref=?";
+
+			pstmt = conn.prepareStatement(sql2);
+
+			pstmt.setString(1, com.getCompany());
+			pstmt.setInt(2, com.getIdx1());
 
 			resultCnt = pstmt.executeUpdate();
 
@@ -91,9 +99,166 @@ public class PhoneBookDao {
 				}
 			}
 
-			if (conn != null) {
+		}
+
+		return resultCnt;
+
+	}
+
+	public int univEdit(UnivDTO univ, Connection conn) {
+
+		// JDBC 사용 객체
+		// Connection conn = null;
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultCnt = 0;
+
+		try {
+			// Connection 객체 생성
+			// conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// 주의 !!!!!
+			// 입력된 수정하고자 하는 이름의 데이터가 존재해야 수정 데이터 입력이 시작시킵니다.
+			// 그리고 이름의 데이터는 유일조건이 있어야 합니다.
+			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
+			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
+
+			String sql1 = "update phoneinfo_basic  set fr_name = ? , fr_phonenumber = ? , fr_email = ? , fr_address = ? where fr_name=?";
+
+			pstmt = conn.prepareStatement(sql1);
+
+			pstmt.setString(1, univ.getName());
+			pstmt.setString(2, univ.getPhoneNumber());
+			pstmt.setString(3, univ.getEmail());
+			pstmt.setString(4, univ.getAddr());
+			pstmt.setString(5, univ.getName());
+
+			resultCnt = pstmt.executeUpdate();
+
+			String sql2 = "update phoneinfo_cafe  set fr_c_cafename = ? , fr_nicname = ? where fr_reff=?";
+
+			pstmt = conn.prepareStatement(sql2);
+
+			pstmt.setString(1, univ.getMajor());
+			pstmt.setInt(2, univ.getYear());
+			pstmt.setInt(3, univ.getIdx1());
+
+			resultCnt = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
 				try {
-					conn.close();
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return resultCnt;
+
+	}
+
+	public int cafeEdit(CafeDTO newCafe, Connection conn) {
+
+		// JDBC 사용 객체
+		// Connection conn = null;
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultCnt = 0;
+
+		try {
+			// Connection 객체 생성
+			// conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// 주의 !!!!!
+			// 입력된 수정하고자 하는 이름의 데이터가 존재해야 수정 데이터 입력이 시작시킵니다.
+			// 그리고 이름의 데이터는 유일조건이 있어야 합니다.
+			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
+			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
+
+			String sql1 = "update phoneinfo_basic  set fr_name = ? , fr_phonenumber = ? , fr_email = ? , fr_address = ? where fr_name=?";
+
+			pstmt = conn.prepareStatement(sql1);
+
+			pstmt.setString(1, newCafe.getName());
+			pstmt.setString(2, newCafe.getPhoneNumber());
+			pstmt.setString(3, newCafe.getEmail());
+			pstmt.setString(4, newCafe.getAddr());
+			pstmt.setString(5, newCafe.getName());
+
+			resultCnt = pstmt.executeUpdate();
+
+			String sql2 = "update phoneinfo_cafe  set fr_c_cafename = ? , fr_nicname = ? where fr_ref=?";
+
+			pstmt = conn.prepareStatement(sql2);
+
+			pstmt.setString(1, newCafe.getCafaName());
+			pstmt.setString(2, newCafe.getNicName());
+			pstmt.setInt(3, newCafe.getIdx1());
+
+			resultCnt = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -144,7 +309,78 @@ public class PhoneBookDao {
 	}
 
 	// 동호회 친구 검색
-	public List<CafeDTO> cafeSearch(String name, Connection conn) {
+	public CafeDTO cafeSearch(String name, Connection conn) {
+
+		// JDBC 사용 객체
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		CafeDTO cafe = null;
+
+		try {
+
+			// 2. 데이터베이스 연결
+			// Connection 객체 생성
+			conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// Mysql
+			// "SELECT * FROM dept WHERE dname LIKE ?"
+			// psmt.setString(1, "%"+name+"%");
+
+			// Oracle
+			// select * from dept where dname like '%'||?||'%'
+
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where  fr_name  like '%'||?||'%'";
+			// String sql = "select * from dept where dname=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				cafe = new CafeDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+			}
+
+			// 4. 데이터베이스 연결 종료
+			// pstmt.close();
+			// conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return cafe;
+
+	}
+
+	// 동호회 친구 검색 (list)
+	public List<CafeDTO> cafeSearchList(String name, Connection conn) {
 
 		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
@@ -214,12 +450,153 @@ public class PhoneBookDao {
 
 	}
 
-	// 학교 친구 검색
-	public List<UnivDTO> univSearch(String name, Connection conn) {
+	// 동호회 친구 검색 (boolean)
+	public boolean cafeSearchBool(String name, Connection conn) {
 
 		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		boolean checkNull = false;
+
+		try {
+
+			// 2. 데이터베이스 연결
+			// Connection 객체 생성
+			conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// Mysql
+			// "SELECT * FROM dept WHERE dname LIKE ?"
+			// psmt.setString(1, "%"+name+"%");
+
+			// Oracle
+			// select * from dept where dname like '%'||?||'%'
+
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where  fr_name  like '%'||?||'%'";
+			// String sql = "select * from dept where dname=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			if (rs.next() == true) {
+				checkNull = true;
+			}
+
+			// 4. 데이터베이스 연결 종료
+			// pstmt.close();
+			// conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return checkNull;
+
+	}
+
+	// 학교 친구 검색
+	public UnivDTO univSearch(String name, Connection conn) {
+
+		// JDBC 사용 객체
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		UnivDTO univ = null;
+
+		try {
+
+			// 2. 데이터베이스 연결
+			// Connection 객체 생성
+			conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// Mysql
+			// "SELECT * FROM dept WHERE dname LIKE ?"
+			// psmt.setString(1, "%"+name+"%");
+
+			// Oracle
+			// select * from dept where dname like '%'||?||'%'
+
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where fr_name  like '%'||?||'%'";
+			// String sql = "select * from dept where dname=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				univ = new UnivDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+			}
+
+			// 4. 데이터베이스 연결 종료
+			// pstmt.close();
+			// conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return univ;
+
+	}
+
+	// 학교 친구 검색(list)
+	public List<UnivDTO> univSearchList(String name, Connection conn) {
+
+		// JDBC 사용 객체
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean checkNull = false;
 
 		List<UnivDTO> univList = new ArrayList<UnivDTO>();
 
@@ -285,13 +662,155 @@ public class PhoneBookDao {
 
 	}
 
+	// 학교 친구 검색(boolean)
+	public boolean univSearchBool(String name, Connection conn) {
+
+		// JDBC 사용 객체
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean checkNull = false;
+
+		try {
+
+			// 2. 데이터베이스 연결
+			// Connection 객체 생성
+			conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// Mysql
+			// "SELECT * FROM dept WHERE dname LIKE ?"
+			// psmt.setString(1, "%"+name+"%");
+
+			// Oracle
+			// select * from dept where dname like '%'||?||'%'
+
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_cafe ca on b.idx = ca.fr_ref where fr_name  like '%'||?||'%'";
+			// String sql = "select * from dept where dname=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			if (rs.next() == true) {
+				checkNull = true;
+			}
+
+			// 4. 데이터베이스 연결 종료
+			// pstmt.close();
+			// conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return checkNull;
+
+	}
+
 	// 회사 친구 검색
-	public List<CompanyDTO> companySearch(String name, Connection conn) {
+	public CompanyDTO companySearch(String name, Connection conn) {
 
 		// JDBC 사용 객체
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
+		CompanyDTO com = null;
+
+		try {
+
+			// 2. 데이터베이스 연결
+			// Connection 객체 생성
+			conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// Mysql
+			// "SELECT * FROM dept WHERE dname LIKE ?"
+			// psmt.setString(1, "%"+name+"%");
+
+			// Oracle
+			// select * from dept where dname like '%'||?||'%'
+
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_com c on b.idx = c.fr_ref  where  fr_name  like '%'||?||'%'";
+			// String sql = "select * from dept where dname=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				com = new CompanyDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
+			}
+
+			// 4. 데이터베이스 연결 종료
+			// pstmt.close();
+			// conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return com;
+
+	}
+
+	// 회사 친구 검색(list)
+	public List<CompanyDTO> companySearchList(String name, Connection conn) {
+
+		// JDBC 사용 객체
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean checkNull = false;
 
 		List<CompanyDTO> comList = new ArrayList<CompanyDTO>();
 
@@ -354,6 +873,76 @@ public class PhoneBookDao {
 		}
 
 		return comList;
+
+	}
+
+	// 회사 친구 검색(boolean)
+	public boolean companySearchBool(String name, Connection conn) {
+
+		// JDBC 사용 객체
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean checkNull = false;
+
+		try {
+
+			// 2. 데이터베이스 연결
+			// Connection 객체 생성
+			conn = ConnectionProvider.getConnection();
+
+			// 3. SQL 처리
+			// Statement or PreparedStatement
+			// pstmt = conn.prepareStatement(SQL 문장)
+
+			// Mysql
+			// "SELECT * FROM dept WHERE dname LIKE ?"
+			// psmt.setString(1, "%"+name+"%");
+
+			// Oracle
+			// select * from dept where dname like '%'||?||'%'
+
+			String sql = "select * from phoneinfo_basic b inner join phoneinfo_com c on b.idx = c.fr_ref  where  fr_name  like '%'||?||'%'";
+			// String sql = "select * from dept where dname=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			if (rs.next() == true) {
+				checkNull = true;
+			}
+
+			// 4. 데이터베이스 연결 종료
+			// pstmt.close();
+			// conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			// 4. 데이터베이스 연결 종료
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+		return checkNull;
 
 	}
 
@@ -817,5 +1406,4 @@ public class PhoneBookDao {
 
 	}
 
-	
 }

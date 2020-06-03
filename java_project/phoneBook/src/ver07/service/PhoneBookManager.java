@@ -6,14 +6,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import jdbc.daoVersion.Dept;
-import jdbc.daoVersion.ManageMain;
 import ver07.ConnectionProvider;
 import ver07.dao.PhoneBookDao;
-import ver07.deletefolder.PhoneCafeInfo;
-import ver07.deletefolder.PhoneCompanyInfo;
 import ver07.deletefolder.PhoneInfor;
-import ver07.deletefolder.PhoneUnivInfo;
 import ver07.dto.AllDTO;
 import ver07.dto.CafeDTO;
 import ver07.dto.CompanyDTO;
@@ -27,6 +22,9 @@ import ver07.veiw.MenuNum;
 public class PhoneBookManager {
 
 	public PhoneBookDao dao = new PhoneBookDao();
+	public CafeDTO cafe = null;
+	public UnivDTO univ = null;
+	public CompanyDTO com = null;
 
 	public Scanner sc;
 
@@ -424,21 +422,6 @@ public class PhoneBookManager {
 	}
 
 	// 4. 배열의 정보 검색 : 이름 기준
-//	int searchIndex(String name) {
-//
-//		// 정상적인 index 값은 0~이상의 값, 찾지 못했을 때 구분 값 -1을 사용
-//		int searchIndex = -1;
-//
-//		// 배열의 반복으로 name값을 비교해서 index 값을 찾는다.
-//		for (int i = 0; i < books.size(); i++) {
-//			if (books.get(i).getName().equals(name)) {
-//				searchIndex = i;
-//				break;
-//			}
-//		}
-//
-//		return searchIndex;
-//	}
 
 	public void showInfo() {
 
@@ -452,9 +435,9 @@ public class PhoneBookManager {
 			System.out.println("검색하고자 하는 이름 : ");
 			String searchName = sc.nextLine();
 
-			List<CafeDTO> list1 = dao.cafeSearch(searchName, conn);
-			List<UnivDTO> list2 = dao.univSearch(searchName, conn);
-			List<CompanyDTO> list3 = dao.companySearch(searchName, conn);
+			List<CafeDTO> list1 = dao.cafeSearchList(searchName, conn);
+			List<UnivDTO> list2 = dao.univSearchList(searchName, conn);
+			List<CompanyDTO> list3 = dao.companySearchList(searchName, conn);
 
 			System.out.println("동호회 친구 중 검색 결과");
 			System.out.println("======================================");
@@ -555,52 +538,115 @@ public class PhoneBookManager {
 	// 6. 배열의 정보를 수정 : 이름 기준
 	public void editInfo() {
 
-		System.out.println("변경하고자 하는 이름을 입력해주세요.");
-		String name = sc.nextLine();
+		Connection conn = null;
+		boolean cafeNull = false;
+		boolean univNull = false;
+		boolean comNull = false;
 
-		int index = searchIndex(name);
-		PhoneInfor info = null;
+		try {
+			conn = ConnectionProvider.getConnection();
 
-		if (index < 0) {
-			System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
-		} else {
-			String editName = books.get(index).getName();
-			System.out.println("수정 데이터 입력을 시작합니다.");
-			System.out.println("이름은 " + editName + "입니다.");
-			System.out.println("전화번호를 입력해주세요.");
-			String phoneNumber = sc.nextLine();
-			System.out.println("주소를를 입력해주세요.");
-			String addr = sc.nextLine();
-			System.out.println("이메일을 입력해주세요.");
-			String email = sc.nextLine();
-			// 저장된 인스턴스가 : 대학, 회사, 동호회
-			if (books.get(index) instanceof PhoneUnivInfo) {
-				System.out.println("전공을 입력해주세요.");
-				String major = sc.nextLine();
-				System.out.println("학년을 입력해주세요.");
-				String grade = sc.nextLine();
+			conn.setAutoCommit(false);
 
-				info = new PhoneUnivInfo(name, phoneNumber, addr, email, major, grade);
-			} else if (books.get(index) instanceof PhoneCompanyInfo) {
-				System.out.println("회사를 입력해주세요.");
-				String company = sc.nextLine();
-				System.out.println("부서를 입력해주세요.");
-				String dept = sc.nextLine();
-				System.out.println("직급을 입력해주세요.");
-				String job = sc.nextLine();
-				info = new PhoneCompanyInfo(name, phoneNumber, addr, email, company, dept, job);
-			} else if (books.get(index) instanceof PhoneCafeInfo) {
-				System.out.println("동호회 이름을 입력해주세요.");
-				String cafeName = sc.nextLine();
-				System.out.println("닉네임을 입력해주세요.");
-				String nicName = sc.nextLine();
+			System.out.println("변경하고자 하는 이름을 입력해주세요.");
+			String name = sc.nextLine();
 
-				info = new PhoneCafeInfo(name, phoneNumber, addr, email, cafeName, nicName);
+			cafeNull = dao.cafeSearchBool(name, conn);
+			univNull = dao.univSearchBool(name, conn);
+			comNull = dao.companySearchBool(name, conn);
+
+			if (cafeNull == false && univNull == false && comNull == false) {
+				System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
+			} else {
+
+				// 저장된 인스턴스가 : 대학, 회사, 동호회
+				if (univNull == true) {
+					UnivDTO univInfo = dao.univSearch(name, conn);
+					System.out.println("수정 데이터 입력을 시작합니다.");
+					System.out.println("이름은 " + univInfo.getName() + "입니다.");
+					System.out.println("전화번호를 입력해주세요.");
+					String phoneNumber = sc.nextLine();
+					System.out.println("주소를를 입력해주세요.");
+					String addr = sc.nextLine();
+					System.out.println("이메일을 입력해주세요.");
+					String email = sc.nextLine();
+					System.out.println("전공을 입력해주세요.");
+					String major = sc.nextLine();
+					System.out.println("학년을 입력해주세요.");
+					int grade = sc.nextInt();
+					sc.nextLine();
+
+					univ = new UnivDTO(name, phoneNumber, addr, email, major, grade);
+
+					int resultCnt = dao.univEdit(univ, conn);
+
+					if (resultCnt > 0) {
+						System.out.println("정상적으로 수정 되었습니다.");
+						System.out.println(resultCnt + "행이 수정되었습니다.");
+					}
+					
+				} else if (comNull == true) {
+					CompanyDTO comInfo = dao.companySearch(name, conn);
+					System.out.println("수정 데이터 입력을 시작합니다.");
+					System.out.println("이름은 " + comInfo.getName() + "입니다.");
+					System.out.println("전화번호를 입력해주세요.");
+					String phoneNumber = sc.nextLine();
+					System.out.println("주소를를 입력해주세요.");
+					String addr = sc.nextLine();
+					System.out.println("이메일을 입력해주세요.");
+					String email = sc.nextLine();
+					System.out.println("회사를 입력해주세요.");
+					String company = sc.nextLine();
+
+					com = new CompanyDTO(name, phoneNumber, addr, email, company);
+
+					int resultCnt = dao.companyEdit(com, conn);
+
+					if (resultCnt > 0) {
+						System.out.println("정상적으로 수정 되었습니다.");
+						System.out.println(resultCnt + "행이 수정되었습니다.");
+					}
+				} else if (cafeNull = true) {
+					CafeDTO cafeInfo = dao.cafeSearch(name, conn);
+					System.out.println("수정 데이터 입력을 시작합니다.");
+					System.out.println("이름은 " + cafeInfo.getName() + "입니다.");
+					System.out.println("전화번호를 입력해주세요.");
+					String phoneNumber = sc.nextLine();
+					System.out.println("주소를를 입력해주세요.");
+					String addr = sc.nextLine();
+					System.out.println("이메일을 입력해주세요.");
+					String email = sc.nextLine();
+					System.out.println("동호회 이름을 입력해주세요.");
+					String cafeName = sc.nextLine();
+					System.out.println("닉네임을 입력해주세요.");
+					String nicName = sc.nextLine();
+
+					cafe = new CafeDTO(name, phoneNumber, addr, email, cafeName, nicName);
+
+					int resultCnt = dao.cafeEdit(cafe, conn);
+
+					if (resultCnt > 0) {
+						System.out.println("정상적으로 수정 되었습니다.");
+						System.out.println(resultCnt + "행이 수정되었습니다.");
+					}
+				}
+
 			}
 
-			// 배열에 새로운 데이터를 저장
-			books.remove(index);
-			books.add(index, info);
+			conn.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
 	}
 

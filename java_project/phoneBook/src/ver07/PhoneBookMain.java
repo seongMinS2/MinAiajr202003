@@ -19,7 +19,7 @@ public class PhoneBookMain {
             int select = 0;
             try {
                 select = manager.sc.nextInt();
-
+                
                 // 정상 범위는 1~6
                 // MenuNum.CREATE~MenuNum.EXIT
                 if (!(select >= MenuNum.CREATE && select <= MenuNum.EXIT)) {
@@ -53,7 +53,7 @@ public class PhoneBookMain {
                     manager.deleteInfo();	// 삭제 완료
                     break;
                 case MenuNum.EDIT:
-                    //manager.editInfo();
+                    manager.editInfo(); 	// 수정 완료
                     break;
                 case MenuNum.SHOW_ALL:
                     //manager.showAllInfo();	// 전체 출력 완료
