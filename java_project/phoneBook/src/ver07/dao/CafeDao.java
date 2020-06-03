@@ -13,7 +13,7 @@ import ver07.dto.CafeDTO;
 
 public class CafeDao {
 
-	public int cafeBasicEdit(CafeDTO newCafe, Connection conn) {
+	public int cafeBasicEdit(CafeDTO newCafe, Connection conn) throws SQLException {
 
 		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
@@ -32,8 +32,6 @@ public class CafeDao {
 
 			resultCnt = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 
 			if (pstmt != null) {
@@ -49,7 +47,7 @@ public class CafeDao {
 
 	}
 
-	public int cafeEdit(CafeDTO newCafe, Connection conn) {
+	public int cafeEdit(CafeDTO newCafe, Connection conn) throws SQLException {
 
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
@@ -65,9 +63,7 @@ public class CafeDao {
 
 			resultCnt = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}  finally {
 
 			if (pstmt != null) {
 				try {
@@ -236,7 +232,7 @@ public class CafeDao {
 	}
 
 	// 동호회 친구 기본 정보 입력
-		public int cafeBasicInsert(CafeDTO cafe, Connection conn) {
+		public int cafeBasicInsert(CafeDTO cafe, Connection conn) throws SQLException {
 
 			// JDBC 사용 객체
 			PreparedStatement pstmt = null;
@@ -257,9 +253,7 @@ public class CafeDao {
 
 				
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
+			}  finally {
 
 				}
 
@@ -278,7 +272,7 @@ public class CafeDao {
 
 	
 	// 동호회 친구 입력
-	public int cafeInsert(CafeDTO cafe, Connection conn) {
+	public int cafeInsert(CafeDTO cafe, Connection conn) throws SQLException {
 
 		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
@@ -295,9 +289,7 @@ public class CafeDao {
 
 			resultCnt += pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}  finally {
 
 			if (pstmt != null) {
 				try {

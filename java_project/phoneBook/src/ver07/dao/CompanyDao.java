@@ -14,7 +14,7 @@ import ver07.dto.UnivDTO;
 
 public class CompanyDao {
 	
-	public int companyBasicEdit(CompanyDTO com, Connection conn) {
+	public int companyBasicEdit(CompanyDTO com, Connection conn) throws SQLException {
 
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
@@ -33,8 +33,6 @@ public class CompanyDao {
 
 			resultCnt = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 
 			if (pstmt != null) {
@@ -52,7 +50,7 @@ public class CompanyDao {
 
 	}
 
-	public int companyEdit(CompanyDTO com, Connection conn) {
+	public int companyEdit(CompanyDTO com, Connection conn) throws SQLException {
 
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
@@ -68,9 +66,7 @@ public class CompanyDao {
 
 			resultCnt = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}  finally {
 
 			if (pstmt != null) {
 				try {
@@ -235,7 +231,7 @@ public class CompanyDao {
 	}
 
 	// 회사 친구 기본 정보 입력
-		public int companyBasicInsert(CompanyDTO company, Connection conn) {
+		public int companyBasicInsert(CompanyDTO company, Connection conn) throws SQLException {
 
 			// JDBC 사용 객체
 			PreparedStatement pstmt = null;
@@ -254,9 +250,7 @@ public class CompanyDao {
 
 				resultCnt = pstmt.executeUpdate();
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
+			}  finally {
 
 				if (pstmt != null) {
 					try {
@@ -274,7 +268,7 @@ public class CompanyDao {
 		}
 	
 	// 회사 친구 입력
-	public int companyInsert(CompanyDTO company, Connection conn) {
+	public int companyInsert(CompanyDTO company, Connection conn) throws SQLException {
 
 		// JDBC 사용 객체
 		PreparedStatement pstmt = null;
@@ -290,9 +284,7 @@ public class CompanyDao {
 
 			resultCnt += pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}  finally {
 
 			if (pstmt != null) {
 				try {

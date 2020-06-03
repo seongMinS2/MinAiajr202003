@@ -14,7 +14,7 @@ import ver07.dto.UnivDTO;
 public class UnivDao {
 	
 	//학교 친구 기본 정보 테이블 수정
-			public int basicEdit(UnivDTO univ, Connection conn) {
+			public int basicEdit(UnivDTO univ, Connection conn) throws SQLException {
 
 				PreparedStatement pstmt = null;
 				int resultCnt = 0;
@@ -33,8 +33,6 @@ public class UnivDao {
 
 					resultCnt = pstmt.executeUpdate();
 
-				} catch (SQLException e) {
-					e.printStackTrace();
 				} finally {
 
 					if (pstmt != null) {
@@ -53,7 +51,7 @@ public class UnivDao {
 			}
 	
 	//학교 친구 수정
-	public int univEdit(UnivDTO univ, Connection conn) {
+	public int univEdit(UnivDTO univ, Connection conn) throws SQLException {
 
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
@@ -70,8 +68,6 @@ public class UnivDao {
 
 			resultCnt = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 
 			if (pstmt != null) {
@@ -237,7 +233,7 @@ public class UnivDao {
 	}
 	
 	// 학교 친구 기본 정보 입력
-		public int univBasicInsert(UnivDTO univ, Connection conn) {
+		public int univBasicInsert(UnivDTO univ, Connection conn) throws SQLException {
 
 			PreparedStatement pstmt = null;
 			int resultCnt = 0;
@@ -255,8 +251,6 @@ public class UnivDao {
 
 				resultCnt = pstmt.executeUpdate();
 
-			} catch (SQLException e) {
-				e.printStackTrace();
 			} finally {
 
 				if (pstmt != null) {
@@ -275,7 +269,7 @@ public class UnivDao {
 		}
 
 	// 학교 친구 입력
-	public int univInsert(UnivDTO univ, Connection conn) {
+	public int univInsert(UnivDTO univ, Connection conn) throws SQLException {
 
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
@@ -290,9 +284,7 @@ public class UnivDao {
 
 			resultCnt += pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}  finally {
 
 			if (pstmt != null) {
 				try {

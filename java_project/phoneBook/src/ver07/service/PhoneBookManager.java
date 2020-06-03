@@ -162,6 +162,7 @@ public class PhoneBookManager {
 				info = new UnivDTO(name, phoneNumber, addr, email, major, year);
 
 				int resultCnt = uDao.univBasicInsert(info, conn);
+				
 					resultCnt += uDao.univInsert(info, conn);
 
 				if (resultCnt > 1) {
@@ -197,6 +198,7 @@ public class PhoneBookManager {
 				break;
 
 			case MenuNum.CAFE:
+				
 				System.out.println("동호회 이름을 입려해주세요.");
 				String cafeName = sc.nextLine();
 				System.out.println("닉네임을 입려해주세요.");
@@ -221,9 +223,16 @@ public class PhoneBookManager {
 			conn.commit();
 
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					System.out.println("rollback 에러!!");
+					e1.printStackTrace();
+				}
+			}
 			e2.printStackTrace();
-		} finally {
+		} finally { 
 			if (conn != null) {
 				try {
 					conn.close();
@@ -268,7 +277,7 @@ public class PhoneBookManager {
 					System.out.printf("%5s", allList.get(i).getIdx4() + "\t");
 					System.out.printf("%12s", allList.get(i).getCafaName() + "\t");
 					System.out.printf("%12s", allList.get(i).getNicName() + "\t");
-					System.out.printf("%5s", allList.get(i).getIdx5() + "\n");
+					System.out.printf("%5s", allList.get(i).getIdx5() + "\n"); 
 				}
 			} else {
 				System.out.println("입력된 데이터가 없습니다.");
