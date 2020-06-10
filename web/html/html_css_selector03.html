@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*
+     속성선택자
+        선택자[속성이름] : 특성속성을 가지는 태그들을 선택
+        ex) input[type]
+        선택자[속성이름=속성값] : 특정 속성을 가지며, 속성에
+        특정 값을 가지는 태그들을 선택
+        ex) input[type=password]
+*/
+        input {
+            height: 30px;
+            margin: 10px 0;
+        }
+
+        /*
+        input[type] {
+            border: 1px solid blue;
+        }
+*/
+
+        input[type=text] {
+            background-color: aqua;
+        }
+
+        input[type=password] {
+            background-color: aquamarine;
+        }
+
+        img[alt] {
+            width: 300px;
+        }
+
+        img[src $=jpg] {
+            border: 1px solid red;
+        }
+
+        img[src $=png] {
+            border: 3px solid green;
+        }
+
+        후손선택 : 선택의 범위를 제한 선택자 범위안의 선택자 ex) div h1 {}
+
+        #header h1,
+        #header h2 {
+            color: red;
+        }
+
+        /*
+        form input {
+            width: 100%;
+        }
+*/
+
+        h2 {
+            color: beige
+        }
+
+        /*
+        자손서택자
+        
+        선택자 > 선택자
+        
+        div > h1 {
+            
+        }
+*/
+
+        #header>h1 {
+            background-color: aquamarine;
+        }
+
+        table>tbody>tr>td {
+            color: red;
+        }
+
+        /*
+        동위 선택자 : 같은 레벨의(형제) 태그들을 기준으로 선택
+         + : 바로뒤의 요소 선택
+        
+         - : 같은 레벨의 형제 태그들 중 선택
+*/
+
+        h3+h4 {
+            color: blue;
+        }
+
+        h3~h4 {
+            color:
+        }
+
+        /*
+        반응선택자
+        
+        선택자:hover -> 마우스가 선택된 요소 영역으로 들어갔을 때
+        
+        선택자:active -> 마우스 왼쪽 버튼을 클릭한 상태
+*/
+        h3 {
+            background-color: aqua;
+        }
+
+        h3:hover {
+            color: red;
+            font-size: 32px;
+        }
+
+        h3:active {
+            color: blue;
+            font-size: 40px;
+            font-style: italic;
+        }
+
+        #myform input {
+            background-color: white;
+        }
+
+        #myform input:disabled {
+            background-color: darkslategrey;
+        }
+
+        #myform input:enabled {
+            background-color: =azure;
+        }
+
+        #myform input[type=checkbox] {
+            width: 30px;
+            height: 50px;
+        }
+
+        #myform input[type=checkbox]:checked {
+            width: 50px;
+            height: 50px;
+        }
+
+        #viewmenu+div {
+            display: none;
+        }
+
+        #viewmenu:checked+div {
+            display: block;
+        }
+
+        #nav {
+            overflow: hidden;
+        }
+
+        #nav>li {
+            list-style: none;
+            float: left;
+            padding: 15px;
+        }
+
+        #nav>li:nth-child(2n) {background-color:aqua}
+        #nav>li:nth-child(2n+1) {background-color: aquamarine}
+
+        #nav>li:first-child {
+/*            border: 1px solid gray;*/
+            border-radius: 10px 0 0 10px;
+        }
+
+        #nav>li:last-child {
+/*            border: 1px solid gray;*/
+            border-radius: 0 10px 10px 0;
+        }
+        p::first-letter{
+            font-size : 1.5em;
+        }
+        
+        p::first-line{
+            color: blueviolet;
+            font-weight: bold;
+        }
+        
+        p::selection {
+            color : blue;
+        }
+        
+        a:link {
+            color : red;
+            text-decoration: none;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+   
+   
+   
+   
+    
+    
+    <h1>Lorem ipsum dolor sit amet</h1>     
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>     
+    <p>Aenean ac erat et massa vehicula laoreet consequat et sem.</p> 
+    
+    
+    
+    
+    <hr>
+
+    <ul id="nav">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+
+
+
+
+
+
+
+
+    <hr>
+
+
+
+
+
+    <form id="myform">
+
+        <div>
+            약관보기<input type="checkbox" id="viewmenu">
+            <div>
+                <h4>이용 약관</h4>
+                <p>문제가 생기면 바로 강퇴 됩니다.</p>
+            </div>
+        </div>
+
+        <div>
+            약관동의<input type="checkbox" checked>
+        </div>
+
+        <div>
+            마케팅동의<input type="checkbox">
+        </div>
+
+        <div>
+            <input type="text" disabled>
+        </div>
+
+        <br>
+
+        <div>
+            <input type="text" readonly>
+        </div>
+
+        <br>
+
+        <div>
+            <input type="text" readonly>
+        </div>
+
+        <br>
+
+        <div>
+            <input type="text" required>
+        </div>
+
+
+        <input type="submit">
+
+    </form>
+
+
+    <hr>
+
+
+    <h4>Header-4</h4>
+    <h3>Header-3</h3>
+    <h4>Header-4</h4>
+    <h4>Header-4</h4>
+    <h4>Header-4</h4>
+
+    <table border="34">
+        <tr>
+            <td>아이디</td>
+            <td><input></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input></td>
+        </tr>
+    </table>
+
+
+    <div id="header">
+        <h1 class="title">title</h1>
+
+        <div id="nav">
+            <h1 class="title"> Navigation </h1>
+        </div>
+
+        <h1>etc</h1>
+        <h2>h2</h2>
+    </div>
+
+
+
+
+    <h2> h2 tage</h2>
+
+    <div id="section">
+
+        <h1>Title</h1>
+        <p>안녕하세요.</p>
+    </div>
+
+
+
+
+    <form>
+        <input>
+        <br>
+        <input type="text">
+        <br>
+        <input type="password">
+    </form>
+    <br>
+
+    <img src="../images/mini1.jpg">
+    <img src="../images/mini1.jpg" alt="미니언즈">
+    <img src="../images/타노스.png">
+
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <h3>*회원 가입을 하기에 앞서 회원약관을 읽어보시기 바랍니다.</h2>
+
+        <p><textarea cols="100" lows="50">인터넷 쇼핑몰 『쇼핑몰』 회원 약관 총칙 회원가입, 탈퇴 서비스 이용 교환, 환불 정보보호,
+           보안 의무,책임</textarea></p>
+        <form>
+
+            <table>
+                <tr>
+                    <td>위의 약관에*</td>
+                    <td><input type="checkbox" name="check">[동의합니다]</td>
+                </tr>
+            
+                *회원정보를 입력하신 후 <b>가입하기</b>를 눌러주십시요.*표시는 필수입력입니다.
+
+                <tr>
+                    <td>이름*</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>아이디(ID)*</td>
+                    <td><input type="text" name="id" size="7"><a href="">[중복확인]</a>(문자와 숫자 4~10자리)</td>
+                </tr>
+                <tr>
+                    <td>비밀번호*</td>
+                    <td><input type="password" name="pw" size="7">비밀번호 확인<input type="password" name="pwCheck" size="7">(문자와 숫자 4~10자리)</td>
+                </tr>
+
+                <tr>
+                    <td>주민등록번호*</td>
+                    <td><input type="text" name="front" size="5">-<input type="password" name="back" size="5"></td>
+                </tr>
+                <tr>
+                    <td>E-mail*</td>
+                    <td><input type="text" name="email"><input type="checkbox" name="checkEmail">[정보 메일을 수신함]</td>
+
+                </tr>
+
+                *자택,회사주소 입력하면 상품구매시 자동으로 입력됩니다.
+
+                <tr>
+                    <td>자택전화</td>
+                    <td><input type="text" name="pnum"></td>
+                </tr>
+                <tr>
+                    <td>자택주소*</td>
+                    <td><input type="text" name="HomAddrF" size="5">-<input type="text" name="HomAddrB" size="5">
+                        <a href="">[우편번호검색]</a></td>
+
+                </tr>
+                <tr>
+                    <td>나머지*</td>
+                    <td><input type="text" name="etcH" size="70"></td>
+                </tr>
+                <tr>
+                    <td>비상전화*</td>
+                    <td><input type="text" name="pastNum">(배송시 참조합니다.)</td>
+
+                </tr>
+
+                *회사주소는 옵션입니다.
+
+                <tr>
+                    <td>회사전화</td>
+                    <td><input type="text" name="comNum"></td>
+                </tr>
+                <tr>
+                    <td>회사주소</td>
+                    <td><input type="text" name="comAddrF" size="5">-<input type="text" name="comAddrB" size="5"><a href="">[우편번호검색]</a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>나머지*</td>
+                    <td><input type="text" name="etcC" size="70"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="가입하기"></td>
+                    <td><input type="reset" value="취소하기"></td>
+                </tr>
+
+            </table>
+        </form>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>절대위치</title>
+    <style>
+        * {
+            /* 초기화 */
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            width: 400px;
+            height: 200px;
+            border: 5px solid #DDD;
+
+            margin: 50px auto;
+
+            position: relative;
+
+            /* 절대좌표의 기준으로 설정 */
+
+        }
+
+        .cicle {
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+
+            border-radius: 50%;
+
+            text-align: center;
+
+            line-height: 50px;
+
+            position: absolute;
+        }
+
+        .c1 {
+            background-color: cornsilk;
+            left: 5px;
+            top: 5px;
+
+        }
+
+        .c2 {
+            background-color: aquamarine;
+            right: 5px;
+            top: 5px;
+        }
+
+        .c3 {
+            background-color: chartreuse;
+            left: 5px;
+            bottom: 5px;
+        }
+
+        .c4 {
+            background-color: darkorchid;
+            right: 5px;
+            bottom: 5px;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="cicle c1">1</div>
+        <div class="cicle c2">2</div>
+        <div class="cicle c3">3</div>
+        <div class="cicle c4">4</div>
+    </div>
+
+</body></html>

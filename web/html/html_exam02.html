@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background-color: beige;
+        }
+        
+        input {
+            margin:0;
+            padding:0;
+        }
+
+        #mainWrap {
+            /*            표현 영역*/
+            width: 898px;
+            
+
+            border: 1px solid #666666;
+            border-radius: 5px;
+
+            background-color: white;
+
+            /*정렬*/
+            margin: 20px auto;
+
+            padding: 15px;
+
+        }
+
+        header {
+            padding: 15px;
+        }
+
+        header>h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            overflow: hidden;
+            
+            border-top:1px solid;
+            #AAA;
+            border-bottom:1px solid;
+            #AAA;
+            
+            height: 30px;
+        }
+
+        nav>ul.menu {
+            float: left;
+
+            list-style: none;
+        }
+
+        nav>ul.menu>li {
+            
+            float: left;
+            padding: 0 20px;
+
+            height: 30px;
+            line-height: 30px;
+        }
+
+        nav>div.search {
+            float: right;
+            height: 30px;
+        }
+        
+        nav>div.search>input[type=text]{
+            height : 20px;
+            
+            border: 1px solid #AAA;
+            
+            border-radius: 10px 0 0 10px;
+        }
+        
+        nav>div.search>input[type=submit]{
+            
+            height : 22px;
+            width: 50px;
+            
+            border-radius: 0 11px 11px 0;
+            border : 1px solid #AAA;
+            
+            margin-left: -5px;
+            
+            vertical-align: middle;
+            
+        }
+        
+        #content>section>article{
+            margin: 15px 5px;
+        }
+        
+        #content{
+            overflow: hidden;
+        }
+        
+        section{
+            width : 690px;
+            float: left;
+        }
+        
+        aside{
+            width: 160px;
+            float: right;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div id="mainWrap">
+        <header>
+            <h1>매일쓰는 일기</h1>
+            <h4>박성민</h4>
+        </header>
+
+        <nav class="nav">
+            <ul class="menu">
+                <li>html5</li>
+                <li>css3</li>
+                <li>javascript</li>
+            </ul>
+            <div class="search">
+                <input type="text">
+                <input type="submit">
+
+            </div>
+        </nav>
+
+        <div id="content">
+            <h1>미니언즈</h1>
+            <h4 class="date">2020.06.10</h4>
+            <img src="../images/mini1.jpg"> 
+            <section>
+            <article>
+            
+            <p>
+                자바(영어: Java, 문화어: 쟈바)는 썬 마이크로시스템즈의 제임스 고슬링(James Gosling)과 다른 연구원들이 개발한 객체 지향적 프로그래밍 언어이다. 1991년 그린 프로젝트(Green Project)라는 이름으로 시작해 1995년에 발표했다. 처음에는 가전제품 내에 탑재해 동작하는 프로그램을 위해 개발했지만 현재 웹 애플리케이션 개발에 가장 많이 사용하는 언어 가운데 하나이고, 모바일 기기용 소프트웨어 개발에도 널리 사용하고 있다. 현재 버전 10까지 출시했다.
+            </p>
+            </article>
+            </section>
+        </div>
+
+        <aside>
+            <h4>카테고리</h4>
+            <ul>
+                <li>데이터</li>
+                <li>데이터</li>
+                <li>데이터</li>
+                <li>데이터</li>
+                <li>데이터</li>
+            </ul>
+            <h4>최근 글</h4>
+            <ul>
+                <li>데이터</li>
+                <li>데이터</li>
+                <li>데이터</li>
+                <li>데이터</li>
+            </ul>
+        </aside>
+
+    </div>
+
+</body></html>
