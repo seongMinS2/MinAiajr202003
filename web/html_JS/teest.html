@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    시작값: <input type="text" id="t1" /> 마지막값:
+    <input type="text" id="t2" /> <br />
+    <p id="p1"></p>
+    <p id="p2"></p>
+
+    <script>
+      let t1 = document.getElementById("t1");
+      let t2 = document.getElementById("t2");
+
+      t1.addEventListener("keydown", (e) => {
+        let p1 = document.getElementById("p1");
+        p1.innerHTML = e.target.value;
+      });
+
+      t2.addEventListener("keydown", (e) => {
+        let p2 = document.getElementById("p2");
+        p2.innerHTML = e.target.value;
+      });
+    </script>
+  </body>
+</html>

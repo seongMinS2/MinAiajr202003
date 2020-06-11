@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        
+        //범위 안의 랜덤한 난수를 생성하는 함수
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+
+        //1~100 난수 생성
+        var num = getRandom(1, 100);
+        var cnt = 0;
+      while(cnt < 10){
+        let userNum = prompt('숫자를 입력하세요');
+            if(userNum > num){
+                alert('입력값보다 낮습니다.');
+                cnt++;
+            }
+             else if(userNum < num){
+                alert('입력값보다 높습니다.');
+                cnt++;
+             }
+            else if(userNum == num){
+                alert('정답입니다.');
+                cnt = 100;
+            }
+      }
+      if(cnt === 100)
+          alert('승리!');
+        else
+          alert('패배!');
+      
+      
+
+
+    </script>
+</head>
+
+<body>
+
+  <body>
+   
+    </script>
+
+
+</body>
+
+</html>
