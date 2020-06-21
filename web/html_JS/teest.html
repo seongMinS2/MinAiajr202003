@@ -1,29 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    시작값: <input type="text" id="t1" /> 마지막값:
-    <input type="text" id="t2" /> <br />
-    <p id="p1"></p>
-    <p id="p2"></p>
-
-    <script>
-      let t1 = document.getElementById("t1");
-      let t2 = document.getElementById("t2");
-
-      t1.addEventListener("keydown", (e) => {
-        let p1 = document.getElementById("p1");
-        p1.innerHTML = e.target.value;
-      });
-
-      t2.addEventListener("keydown", (e) => {
-        let p2 = document.getElementById("p2");
-        p2.innerHTML = e.target.value;
-      });
-    </script>
-  </body>
-</html>
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Document</title>
+              </head>
+              <body>
+                시작값: <input type="number" id="t1" /> 마지막값:
+                <input type="number" id="t2" /> <br />
+                <p id="p1"></p>
+                부터
+                <p id="p2"></p>
+            
+                <input type="number" id="answer" />
+                <button id="b1">정답 제출하기</button>
+            
+                <p id="chance">남은 기회: 10</p>
+                <script>
+                  let t1 = document.getElementById("t1");
+                  let t2 = document.getElementById("t2");
+            
+                  t1.addEventListener("keyup", (e) => {
+                    let p1 = document.getElementById("p1");
+                    p1.innerHTML = e.target.value;
+                  });
+            
+                  t2.addEventListener("keyup", (e) => {
+                    let p2 = document.getElementById("p2");
+                    p2.innerHTML = e.target.value;
+                  });
+            
+                  let count = 10;
+            
+                  b1.addEventListener("click", () => {
+                    let start1 = document.getElementById("p1").innerText;
+                    let end1 = document.getElementById("p2").innerText;
+                    let start = Number(start1);
+                    let end = Number(end1);
+            
+                    let answer = document.getElementById("answer").value;
+                    let parseAnswer = Number(answer);
+                    if (count <= 0) {
+                      alert("패배");
+                      return;
+                    }
+                    console.log("click: " + start);
+                    console.log("click: " + end);
+            
+                    if (parseAnswer >= start && parseAnswer <= end) {
+                      alert("승리!");
+            
+                      return;
+                    } else {
+                      let chance = document.getElementById("chance");
+                      chance.innerHTML = "남은 기회: " + --count;
+                    }
+                  });
+                </script>
+              </body>
+            </html>

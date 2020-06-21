@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #agree:checked+div{
+        display:block;
+    }
+
+    .box{
+        border: 3px solid;
+        padding: 10px;
+        height: 30px;
+    }
+    #box1{
+        background-color: aquamarine;
+    }
+
+    #box2 {
+        width: 75%;
+        background-color: blueviolet;
+    }
+
+    #box3 {
+        width: 50%;
+        background-color: cyan;
+    }
+</style>
+</head>
+<body>
+    <div id="box1" class="box" onclick="console.log('box1-onclick)')">
+        <div id="box2" class="box" onclick="console.log('box2-onclick)')">
+            <h1 id="box3" class="box" onclick="console.log('h1-onclick)')"> 클릭하세요.</h1>
+        </div>
+    </div>
+    
+</body>
+</html>

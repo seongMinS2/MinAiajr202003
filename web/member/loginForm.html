@@ -1,45 +1,63 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
-    <title>로그인 form</title>
-    <link>
-    <style>
-        h1 {
-            color:black;
-            background-color: azure;
-            font-weight: 200;
-            border: 1px solid #FF0000;
-        }    
-    
-    </style>
-</head>
+        <title>로그인 Form</title>
+        <meta charset="utf-8">
+        
+        <style>
+        
+            body, div, h1, form {
+                margin:0;
+                padding:0;
+            }
+            
+            h1 {
+                margin: 15px;
+            }
+            
+            #form {
+                margin : 10px auto;
+            }
+            
+            td {
+                padding : 10px;
+            }
+            
+            #btn_submit{
+                padding : 10px;
+                background-color: aquamarine;
+                font-weight: bold;
+                color: darkgreen;
+                border : 1px solid #EEEEEE;
+            }
+            
+            
+        </style>
 
-<body>
-   
-   <h3>실명확인회원가입</h1>
-  <form>
-    <table>
-       <tr>
-           <td><input type="radio">아이핀(I-Pin)</td>
-           <td><input type="radio">주민등록번호</td>
-       </tr>
-        <tr>
-            <td>이름</td>
-            <td><input type="text" name="id"></td>
-        </tr>
-        <tr>
-            <td>주민등록번호 </td>
-            <td><input type="text" name="front" size="7">-<input type="password" name="back" size="7"></td>
-        </tr>
+    </head>
+    <body>
+        <h1>회원 로그인</h1>
+        <hr>
+        <form action="" method="get" id="loginForm">
+        <table id="form">
+            <tr>
+                <td>아이디(이메일)</td>
+                <td><input type="text" name="id" id="id"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="password" name="pw" id="pw"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input id="btn_submit" type="submit" value="로그인"></td>
+            </tr>
         </table>
-        <table>
-        <tr>
-            <td><input type="checkbox" name="check">주민등록번호 처리에 동의합니다.</td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="확인"></td>
-        </tr>
-    </table>
-    </form>    
-</body></html>
+        </form>
+        
+        
+        
+    </body>
+    <script src="../js/logincheck.js"></script>
+
+</html>

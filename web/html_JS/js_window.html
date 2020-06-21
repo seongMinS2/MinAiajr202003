@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // window.open('http:www.naver.com','new1');
+        // window.open('http:www.daum.net','new2',
+        // 'width=300, height=300');
+
+        var child=window.open('','','width=500, height=500'); // 페이지 크기 고정
+
+        // child.document.write('<h1>안녕하세요. from parent</h1>');
+
+        var html='';
+        html +='<img src="https://upload.wikimedia.org/wikipedia/ko/5/56/%EB%AF%B8%EB%8B%88%EC%96%B8%EC%A6%88.jpg">';
+        html +='<br>';
+        html +='<input type="button" value="닫기" onclick="window.close()">';//window.close() : 현재 페이지 종료
+
+        child.document.write(html);
+
+        alert(location.href);
+        console.log(location.href);
+        console.log(location);
+
+        // setTimeout(function(){
+        //     location.href='https://www.naver.com'
+        // },3000);
+
+        window.onload = function(){
+            var html_val = document.getElementById('test').innerText;
+
+            alert(html_val);
+
+        };
+
+        
+
+    </script>
+</head>
+<body>
+
+    <H1 id="test">안녕하세요.</H1>
+    <script>
+
+    </script>
+</body>
+</html>
