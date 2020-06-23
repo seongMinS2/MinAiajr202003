@@ -1,0 +1,65 @@
+body{
+    background-color: #9E9E9E;
+}
+
+.menu-grid {
+    /* overflow: scroll; */
+    background-color: white;
+    border: 3px solid black;
+    /* left: 30px;
+    
+    width: 700px;
+    height: 800px; */
+   height: 800px;
+}
+
+ .col-sm-2.menu1{
+    background-color: black;
+    color: white;
+    height: 139.22px;
+}
+
+.select-grid {
+    background-color: white;
+    border: 3px solid black;
+
+    /* right: 30px;
+
+    width : 500px;
+    height : 550px; */
+    
+    height: 600px;
+
+}
+
+
+.pay-grid{
+    background-color: white;
+    border: 3px solid black;
+    /* margin-top: 50px;
+
+    right: 30px;
+    bottom: 5px;
+    
+    width: 500px;
+    height: 200px; */
+
+    height: 176px;
+}
+
+
+
+
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    font-size: 18px;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 30px;
+}
