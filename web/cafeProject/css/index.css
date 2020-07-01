@@ -18,6 +18,11 @@ body{
     color: white;
     height: 139.22px;
 }
+.col-sm-4.menu1{
+    background-color: black;
+    color: white;
+    height: 139.22px;
+}
 
 .select-grid {
     background-color: white;
@@ -47,6 +52,28 @@ body{
     height: 176px;
 }
 
+.selected-menu{
+    font-size: 13px;
+}
+
+.name-tag, .qty-tag, .price-tag{
+    border: 1px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -56,6 +83,7 @@ body{
     height: 100%;
 }
 
+/* swiper 위아래설정 */
 .swiper-slide {
     font-size: 18px;
     height: auto;
@@ -63,3 +91,25 @@ body{
     box-sizing: border-box;
     padding: 30px;
 }
+
+
+/* swiper 좌우 설정 */
+.side {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
