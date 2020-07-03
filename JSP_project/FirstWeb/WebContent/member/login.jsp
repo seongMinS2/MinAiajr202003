@@ -4,21 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login Page</title>
 </head>
 <body>
-
-<h1>전송 결과</h1>
+	<h1>로그인 페이지 입니다.</h1>
 	<hr>
-	<table border="1">
-		<tr>
-			<td>이름</td>
-			<td><%= request.getParameter("id") %></td>
-		</tr>
-		<tr>
-			<td>직업</td>
-			<td><%= request.getParameter("pw") %></td>
-		</tr>
-
+	<ul>
+		<li>id : <%= request.getParameter("id")%></li>
+		<li>pw : <%= request.getParameter("pw")%></li>
+	</ul>
 </body>
 </html>
