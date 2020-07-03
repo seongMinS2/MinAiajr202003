@@ -14,7 +14,7 @@
       %>
       <script>
       alert('사용자 전용 페이지 입니다. \n 로그인 해주세요'); 
-      location.href = '../loginform.jsp';
+      location.href = '../loginForm.jsp';
       </script>
       <% 
    }
