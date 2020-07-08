@@ -18,11 +18,8 @@
 		application.setAttribute(uid, new MemberInfo(uid, pw));
 		
 		//로그인 값을 uid로 갖고왔다고 햇을 시
-		MemberInfo mem = application.getAttribute(uid);
+		//MemberInfo mem = application.getAttribute(uid);
 		//널이 아니면 아이디가 있고 아니면 없고
-		if(mem != null){
-			
-		}
 %>
 <!DOCTYPE html>
 <html>
