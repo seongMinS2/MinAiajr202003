@@ -19,6 +19,8 @@
 	<c:if test="${wirteResult == 0}">
 		<h1>글쓰기 실패!!!</h1>
 	</c:if>
+	
+	<a href="list.jsp">목록 보기</a>
 
 </body>
 </html>
