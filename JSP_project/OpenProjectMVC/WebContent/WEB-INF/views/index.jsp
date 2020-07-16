@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>INDEX</title>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css"> --%>
 
 <style>
 </style>
@@ -16,7 +16,7 @@
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 	<div>
-		<h1 class="subtitle">회원 가입</h1>
+		<h1 class="subtitle">홈화면</h1>
 		<hr>
 		<form action="login.jsp" method="post">
 		</form>

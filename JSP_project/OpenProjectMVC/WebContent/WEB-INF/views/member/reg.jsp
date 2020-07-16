@@ -8,7 +8,7 @@
 <title>INDEX</title>
 
 
-<link rel="stylesheet" href="<c:url value="/css/default.css"/>">
+<%-- <link rel="stylesheet" href="<c:url value="/css/default.css"/>"> --%>
 
 <style>
 </style>

@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>INDEX</title>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 
 
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/default.css">
+<%-- <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/default.css"> --%>
 
 <style>
 .check_ok {

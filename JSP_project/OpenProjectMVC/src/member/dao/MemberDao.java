@@ -11,6 +11,8 @@ import java.util.List;
 import member.mdel.Member;
 
 public class MemberDao {
+	Connection conn = null;
+
 	private MemberDao() {
 	}
 
@@ -20,12 +22,13 @@ public class MemberDao {
 		return dao;
 	}
 
+	// 회원 정보 저장
 	public int insertMember(Connection conn, Member member) throws SQLException {
 
 		int resultCnt = 0;
 
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO member (uid,upw,uname,uphoto) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO project.member (uid,upw,uname,uphoto) VALUES (?,?,?,?)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -45,6 +48,40 @@ public class MemberDao {
 
 	}
 
+	// 회원 정보 셀렉트
+
+	public Member selectByMember(Connection conn, String id) throws SQLException {
+
+		Member member = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String sql = "select * from project.member where uid=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				member = new Member(rs.getInt("idx"), rs.getString("uid"), rs.getString("upw"), rs.getString("uname"),
+						rs.getString("uphoto"), rs.getDate("regdate"));
+			}
+
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+		}
+
+		return member;
+	}
+
+	// ID 체크
 	public int selectById(Connection conn, String id) throws SQLException {
 
 		int resultCnt = 0;
@@ -53,7 +90,7 @@ public class MemberDao {
 
 		ResultSet rs;
 
-		String sql = "select count(*) from member where uid=?";
+		String sql = "select count(*) from project.member where uid=?";
 
 		try {
 
@@ -66,6 +103,35 @@ public class MemberDao {
 			if (rs.next()) {
 				resultCnt = rs.getInt(1);
 			}
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+		}
+		return resultCnt;
+	}
+
+	// LoginCheck
+	public int loginCheck(Connection conn,String id, String pw) throws SQLException {
+
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		ResultSet rs;
+
+		String sql = "select uid, upw from project.member where uid=? and upw=?";
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next())
+				resultCnt = 1;
 
 		} finally {
 			if (pstmt != null)

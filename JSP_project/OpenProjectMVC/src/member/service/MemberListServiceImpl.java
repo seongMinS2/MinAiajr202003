@@ -65,6 +65,13 @@ public class MemberListServiceImpl implements Service {
 			System.out.println(memberListView);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		
 		
