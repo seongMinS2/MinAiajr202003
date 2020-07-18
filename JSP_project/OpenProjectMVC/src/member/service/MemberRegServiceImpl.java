@@ -17,7 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
-import member.mdel.Member;
+import member.model.Member;
 import service.Service;
 
 public class MemberRegServiceImpl implements Service {
@@ -41,14 +41,15 @@ public class MemberRegServiceImpl implements Service {
 		Connection conn = null;
 
 		try {
-
+			 //1. multiport/form-data 여부 확인
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
 			if (isMultipart) {
-
+				// 2. 메모리나 파일로 업로드 파일 보관하는 FileItem의 Factory 설정
 				DiskFileItemFactory factory = new DiskFileItemFactory();
+				 // 3. 업로드 요청을 처리하는 ServletFileUpload 생성
 				ServletFileUpload upload = new ServletFileUpload(factory);
-
+				// 4. 업로드 요청 파싱해서 FileItem 목록 구함
 				List<FileItem> items = upload.parseRequest(request);
 
 				Iterator<FileItem> ite = items.iterator();
@@ -81,7 +82,7 @@ public class MemberRegServiceImpl implements Service {
 						// String uri =
 						// request.getSession().getServletContext().getInitParameter("uploadPath");
 
-						// 시스템의 실제(절대) 경로
+						// 시스템의 실제(절대/물리적) 경로
 						String realPath = request.getSession().getServletContext().getRealPath(uri);
 						// System.out.println(realPath);
 
@@ -106,14 +107,18 @@ public class MemberRegServiceImpl implements Service {
 				member.setUphoto(uphoto);
 
 				conn = ConnectionProvider.getConnection();
+				
+				conn.setAutoCommit(false);
 
 				dao = MemberDao.getInstance();
 
 				resultCnt = dao.insertMember(conn, member);
 
+				conn.commit();
+				
 				request.setAttribute("member", member);
+				
 				request.setAttribute("result", resultCnt);
-
 			}
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block

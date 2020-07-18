@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
-import member.mdel.Member;
-import member.mdel.MemberListView;
+import member.model.Member;
+import member.model.MemberListView;
 import service.Service;
 
 public class MemberListServiceImpl implements Service {
@@ -41,6 +41,9 @@ public class MemberListServiceImpl implements Service {
 		
 		try {
 			conn = ConnectionProvider.getConnection();
+			
+			conn.setAutoCommit(false);
+			
 			dao = MemberDao.getInstance();
 			
 			// 전체행 갯수
@@ -63,6 +66,8 @@ public class MemberListServiceImpl implements Service {
 			
 			
 			System.out.println(memberListView);
+			
+			request.setAttribute("memberListView", memberListView);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -77,7 +82,6 @@ public class MemberListServiceImpl implements Service {
 		
 		
 
-		request.setAttribute("memberListView", memberListView);
 		
 		return "/WEB-INF/views/member/memberList.jsp";
 	}

@@ -48,7 +48,10 @@ img{
 						<td>uname ${message.uname }</td>
 						<td><div class = "imageTag"><img alt="프사" src="<c:url value="${message.uphoto}"/>"></div></td>
 						<td>regdate ${message.regdate}</td>
-						<td><a href="memberModify.do">[수정]</a><a href="memberDelete.do">[삭제]</a></td>
+						<td>
+						<a href="memberModifyForm.do?id=${message.uid}&uphoto=${message.uphoto}">[수정]</a>
+						<a href="memberDelete.do?idx=${message.idx}&uphoto=${message.uphoto}">[삭제]</a>
+						</td> 
 					</tr>
 
 					<%-- <a href="deleteMessageConfirm.jsp?mid=${message.mid}">삭제</a> --%>

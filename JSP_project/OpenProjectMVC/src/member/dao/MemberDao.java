@@ -8,10 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import member.mdel.Member;
+import member.model.Member;
 
 public class MemberDao {
-	Connection conn = null;
 
 	private MemberDao() {
 	}
@@ -77,7 +76,6 @@ public class MemberDao {
 			if (pstmt != null)
 				pstmt.close();
 		}
-
 		return member;
 	}
 
@@ -111,8 +109,84 @@ public class MemberDao {
 		return resultCnt;
 	}
 
+	// 회원 테이블 삭제
+	public int deleteByMember(Connection conn, int idx) throws SQLException {
+
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = "DELETE FROM project.member WHERE idx = ?";
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, idx);
+
+			resultCnt = pstmt.executeUpdate();
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+		}
+
+		return resultCnt;
+	}
+	
+	// 회원 프로필 사진 수정
+	public int modifyByPhoto(Connection conn, int idx, String photo) throws SQLException {
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = "UPDATE project.member SET uphoto = ? WHERE idx = ?";
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, photo);
+			pstmt.setInt(2, idx);
+
+			resultCnt = pstmt.executeUpdate();
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+		}
+
+		return resultCnt;
+	}
+	
+	//회원 비밀번호 수정
+	public int modifyByPw(Connection conn, String pw, int idx) throws SQLException {
+		int resultCnt = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE project.member SET upw = ? WHERE idx = ?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, pw);
+			pstmt.setInt(2, idx);
+			
+			resultCnt = pstmt.executeUpdate();
+			
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
+		}
+		
+		
+		return resultCnt;
+	}
+
 	// LoginCheck
-	public int loginCheck(Connection conn,String id, String pw) throws SQLException {
+	public int loginCheck(Connection conn, String id, String pw) throws SQLException {
 
 		int resultCnt = 0;
 
@@ -201,4 +275,5 @@ public class MemberDao {
 
 		return resultCnt;
 	}
+
 }

@@ -23,8 +23,12 @@ public class IdCheckServiceImpl implements Service {
 		
 		Connection conn = null;
 		
+		
 		try {
 			conn = ConnectionProvider.getConnection();
+			
+			conn.setAutoCommit(false);
+			
 			dao = MemberDao.getInstance();
 			
 			int resultCnt = dao.selectById(conn, id);
@@ -32,14 +36,22 @@ public class IdCheckServiceImpl implements Service {
 			if(resultCnt < 1) {
 				result = "Y";
 			}
+			request.setAttribute("idcheck", result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		
 		
 		
-		request.setAttribute("idcheck", result);
 		
 		
 		return "/WEB-INF/views/member/idCheck.jsp";

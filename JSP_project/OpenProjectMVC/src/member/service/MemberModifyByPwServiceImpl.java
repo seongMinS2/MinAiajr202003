@@ -8,49 +8,56 @@ import javax.servlet.http.HttpServletResponse;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
-import member.model.Member;
 import service.Service;
 
-public class MemberModifyFormServiceImpl implements Service {
-
+public class MemberModifyByPwServiceImpl implements Service {
+	
 	MemberDao dao;
 
 	@Override
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
-
-		String id = request.getParameter("id");
-
-//		System.out.println("받아온 id값: " + request.getParameter("id"));
-
-		Connection conn = null;
-
-		Member member = null;
 		
-		dao = MemberDao.getInstance();
-
+		int result = 0;
+		
+		Connection conn = null;
+		String newPw = request.getParameter("upw");
+		System.out.println(newPw);
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		
 		try {
-
 			conn = ConnectionProvider.getConnection();
-			
 			conn.setAutoCommit(false);
-
-			member = dao.selectByMember(conn, id);
 			
-			request.setAttribute("member", member);
+			dao = MemberDao.getInstance();
+			
+			result = dao.modifyByPw(conn, newPw, idx);
+			
+			request.setAttribute("result", result);
 			
 			conn.commit();
-
+			
+			
 		} catch (SQLException e) {
+			System.out.println("SQLException 발생!! rollback합니다.");
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
-			if (conn != null)
+			if(conn != null)
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 		}
-
-		return "/WEB-INF/views/member/modifyForm.jsp";
+		
+		
+		
+		
+		return "/WEB-INF/views/member/modify.jsp";
 	}
+	
 }

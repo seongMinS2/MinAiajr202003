@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
-import member.mdel.Member;
+import member.model.Member;
 import service.Service;
 
 public class MemberLoginServiceImpl implements Service {
@@ -28,10 +28,13 @@ public class MemberLoginServiceImpl implements Service {
 
 		try {
 			conn = ConnectionProvider.getConnection();
+			
+			conn.setAutoCommit(false);
 
 			int resultCnt = dao.loginCheck(conn, id, pw);
 			
 			System.out.println("성공값 : " + resultCnt);
+			
 			
 			if (resultCnt>0) {
 				
@@ -41,8 +44,17 @@ public class MemberLoginServiceImpl implements Service {
 				session.setAttribute("loginInfo", loginInfo);
 				
 			}
+			
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 
 		return "/WEB-INF/views/member/login.jsp";

@@ -15,6 +15,10 @@
 # 로그인 체크
 /member/memberLogin.do=member.service.MemberLoginServiceImpl
 # 수정 체크
-/member/memberModify.do=member.service.MemberModifyFormServiceImpl
-# 삭제 체크
+/member/memberModifyForm.do=member.service.MemberModifyFormServiceImpl
+# 프사 수정 처리
+/member/memberModifyByPhoto.do=member.service.MemberModifyByPhotoServiceImpl
+# 비밀번호 수정 처리
+/member/memberModifyByPw.do=member.service.MemberModifyByPwServiceImpl
+# 삭제 처리
 /member/memberDelete.do=member.service.MemberDeleteFormServiceImpl
