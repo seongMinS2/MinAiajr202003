@@ -22,3 +22,5 @@
 /member/memberModifyByPw.do=member.service.MemberModifyByPwServiceImpl
 # 삭제 처리
 /member/memberDelete.do=member.service.MemberDeleteFormServiceImpl
+#로그아웃 처리
+/member/logout.do=member.service.MemberLogoutServiceImpl

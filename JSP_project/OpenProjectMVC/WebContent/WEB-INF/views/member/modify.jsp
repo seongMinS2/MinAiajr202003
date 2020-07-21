@@ -7,12 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <style>
 </style>
 </head>
 <body>
-	<h1>삭제 / 수정 결과 출력 페이지입니다.</h1>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<h1>결과</h1>
 	<br>
 	
 	<c:if test="${resultCnt == 0 }">
@@ -30,7 +31,7 @@
 	<c:if test="${result == 1 }">
 	<h3>비밀번호 수정 성공!!</h3>
 	</c:if>
-	
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	
 </body>
 </html>

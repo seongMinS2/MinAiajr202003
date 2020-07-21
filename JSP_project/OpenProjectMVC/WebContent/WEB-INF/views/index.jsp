@@ -15,7 +15,7 @@
 
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-	<div>
+	<div class="container">
 		<h1 class="subtitle">홈화면</h1>
 		<hr>
 		<form action="login.jsp" method="post">

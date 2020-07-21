@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</head>
+
+<body>
+    <a id="custom-login-btn" href="javascript:loginWithKakao()">
+        <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
+    </a>
+
+    <button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+
+    <script type="text/javascript">
+        // 웹 플랫폼 도메인 등 초기화한 앱의 설정이 그대로 적용됩니다.
+        // 초기화한 앱에 현재 도메인이 등록되지 않은 경우 에러가 발생합니다.
+        Kakao.init('5a8a5ce6115cd1642bcb72f180541d7b')
+        function loginWithKakao() {
+            Kakao.Auth.login({
+                success: function (authObj) {
+                    alert(JSON.stringify(authObj))
+                    Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: function (res) {
+                            alert(JSON.stringify(res))
+                            console.log(res);
+                        },
+                        fail: function (error) {
+                            alert(
+                                'login success, but failed to request user information: ' +
+                                JSON.stringify(error)
+                            )
+                        },
+                    })
+                },
+                fail: function (err) {
+                    alert(JSON.stringify(err))
+                },
+            })
+        }
+
+        Kakao.init('c089c8172def97eb00c07217cae17495')
+        function kakaoLogout() {
+            if (!Kakao.Auth.getAccessToken()) {
+                alert('Not logged in.')
+                return
+            }
+            Kakao.Auth.logout(function () {
+                alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+            })
+        }
+    </script>
+</body>
+
+</html>
