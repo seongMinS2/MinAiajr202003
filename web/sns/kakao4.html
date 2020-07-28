@@ -23,18 +23,79 @@
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('5a8a5ce6115cd1642bcb72f180541d7b');
         // 카카오 로그인 버튼을 생성합니다.
+       function infoWithKakao() {
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function(res) {
+
+
+                    //alert(JSON.stringify(authObj));
+                    alert('로그인 되었습니다.');
+
+                    $('#login').css('display', 'none');
+                    $('#uinfo').css('display', 'inline');
+                    $('#status').css('display', 'inline');
+                    $('#logout').css('display', 'inline');
+
+                    console.log(res);
+
+                    // -> 요기에다가 회원가입이나 로그인하는 서버 로직 호출해주면되 엌.. 감사합니다...(__)
+                    //alert(res.properties.nickname);
+                    //alert(res.properties.profile_image);
+                    //alert(res.properties.thumnail_imgage);
+                    //alert(res.kakao_account.email);
+
+                },
+                fail: function(error) {
+                    alert(JSON.stringify(error));
+                }
+            });
+        }
+          function loginWithKakao() {
+            Kakao.Auth.login({
+                success: function(authObj) {
+
+                    infoWithKakao();
+                    /*
+                    alert(JSON.stringify(authObj));
+                    alert('로그인 되었습니다.');
+
+                    $('#login').css('display', 'none');
+                    $('#uinfo').css('display', 'inline');
+                    $('#status').css('display', 'inline');
+                    $('#logout').css('display', 'inline');
+                    */
+
+
+                },
+                fail: function(error) {
+                    alert(JSON.stringify(error))
+                }
+            });
+        }
 
 
         function infoWithKakao() {
             Kakao.API.request({
                 url: '/v2/user/me',
                 success: function(res) {
-                    alert(JSON.stringify(res));
 
-                    alert(res.propertise.nickname);
-                    alert(res.propertise.profile_image);
-                    alert(res.propertise.thumnail_imgage);
-                    alert(res.kakao_account.email);
+
+                    //alert(JSON.stringify(authObj));
+                    alert('로그인 되었습니다.');
+
+                    $('#login').css('display', 'none');
+                    $('#uinfo').css('display', 'inline');
+                    $('#status').css('display', 'inline');
+                    $('#logout').css('display', 'inline');
+
+                    console.log(res);
+
+                    
+                    //alert(res.properties.nickname);
+                    //alert(res.properties.profile_image);
+                    //alert(res.properties.thumnail_imgage);
+                    //alert(res.kakao_account.email);
 
                 },
                 fail: function(error) {
@@ -45,7 +106,7 @@
 
         function statusWithKakao() {
             Kakao.Auth.getStatusInfo(function(statusObj) {
-                alert(JSON.stringify(statusObj));
+                // alert(JSON.stringify(statusObj));
 
                 if (statusObj.status == 'connected') {
                     var user = statusObj.user;
@@ -82,23 +143,6 @@
             });
         }
 
-        function loginWithKakao() {
-            Kakao.Auth.login({
-                success: function(authObj) {
-                    alert(JSON.stringify(authObj));
-                    alert('로그인 되었습니다.');
-
-                    $('#login').css('display', 'none');
-                    $('#uinfo').css('display', 'inline');
-                    $('#status').css('display', 'inline');
-                    $('#logout').css('display', 'inline');
-
-                },
-                fail: function(error) {
-                    alert(JSON.stringify(error))
-                }
-            });
-        }
 
 
 
@@ -114,7 +158,7 @@
     
     <script>
         $(document).ready(function(){
-            statusWithKakao();
+            //statusWithKakao();
         });
     </script>
     
