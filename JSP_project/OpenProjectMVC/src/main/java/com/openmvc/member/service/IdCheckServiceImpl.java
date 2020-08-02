@@ -10,6 +10,7 @@ import com.openmvc.jdbc.ConnectionProvider;
 import com.openmvc.member.dao.MemberDao;
 import com.openmvc.service.Service;
 
+@org.springframework.stereotype.Service("idChk")
 public class IdCheckServiceImpl implements Service {
 
 	MemberDao dao = null;

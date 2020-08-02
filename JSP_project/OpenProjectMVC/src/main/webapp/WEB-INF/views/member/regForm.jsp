@@ -92,7 +92,7 @@
 					return false;
 				}
 				$.ajax({
-					url : 'idCheck.do',
+					url : 'idCheck',
 					data : {
 						uid : $(this).val()
 					},

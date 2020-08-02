@@ -154,6 +154,7 @@ public class MemberController {
 	
 	@Autowired
 	Service delete;
+	
 	@RequestMapping(value = "memberDelete")
 	public String deleteMember(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -164,5 +165,14 @@ public class MemberController {
 		return "member/delete";
 	}
 	
+	@Autowired
+	Service idChk;
 
+	@RequestMapping(value = "idCheck")
+	public String idCheck(HttpServletRequest request, HttpServletResponse response) {
+		
+		idChk.getViewPage(request, response);
+		
+		return "member/idCheck";
+	}
 }
