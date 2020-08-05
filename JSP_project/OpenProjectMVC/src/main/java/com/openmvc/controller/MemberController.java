@@ -5,9 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.openmvc.member.model.Member;
+import com.openmvc.member.model.MultMember;
+import com.openmvc.member.service.MemberRegServiceImpl;
 import com.openmvc.service.Service;
 
 @Controller
@@ -60,16 +64,14 @@ public class MemberController {
 
 	
 	@Autowired
-	Service reg;
+	MemberRegServiceImpl reg;
 	
 	@RequestMapping(value = "memberReg", method = RequestMethod.POST)
-	public String memberReg(HttpServletRequest request, HttpServletResponse response) {
+	public String memberReg(MultMember multMember,HttpServletRequest request, Model model) {
 		
 		//reg
 		
-		reg.getViewPage(request, response);
-		
-		return "member/reg";
+		return reg.register(multMember,request, model);
 	}
 	
 	@Autowired

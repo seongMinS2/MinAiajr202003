@@ -9,6 +9,14 @@ public class Member {
 	private String uname;
 	private String uphoto;
 	private Date regdate;
+	
+	
+
+	public Member(String uid, String upw, String uname) {
+		this.uid = uid;
+		this.upw = upw;
+		this.uname = uname;
+	}
 
 	public Member(int idx, String uid, String upw, String uname, String uphoto, Date regdate) {
 		this.idx = idx;

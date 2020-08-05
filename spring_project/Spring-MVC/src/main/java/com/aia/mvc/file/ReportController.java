@@ -18,7 +18,7 @@ public class ReportController {
 		return "report/reportForm";
 	}
 	
-	
+	//리퀘스트 파람을 이용한 파라미터 수집
 	@RequestMapping(value = "/report/upload1", method= RequestMethod.POST)
 	public String upload1(
 			@RequestParam("sno") String sno,
@@ -35,6 +35,7 @@ public class ReportController {
 		return "report/report";
 	}
 	
+	//MultipartHttpServletRequest를 이용한 데이터 수집
 	@RequestMapping(value = "/report/upload2", method= RequestMethod.POST)
 	public String upload2(
 			MultipartHttpServletRequest request,
@@ -54,6 +55,7 @@ public class ReportController {
 		return "report/report";
 	}
 	
+	//커맨드 객체 Report를 이용한 자동 주입 방식
 	@RequestMapping(value = "/report/upload3", method= RequestMethod.POST)
 	public String upload2(Report report,Model model
 			) {

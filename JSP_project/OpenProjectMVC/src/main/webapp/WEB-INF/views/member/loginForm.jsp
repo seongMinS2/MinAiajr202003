@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="로그인">&nbsp;<button type="button" onclick="location.href='memberRegForm.do'">회원가입</button></td>
+					<td><input type="submit" value="로그인">&nbsp;<button type="button" onclick="location.href='memberRegForm'">회원가입</button></td>
 				</tr>
 			</table>
 

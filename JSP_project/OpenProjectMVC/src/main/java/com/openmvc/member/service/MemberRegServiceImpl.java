@@ -1,149 +1,104 @@
 package com.openmvc.member.service;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.openmvc.jdbc.ConnectionProvider;
 import com.openmvc.member.dao.MemberDao;
 import com.openmvc.member.model.Member;
-import com.openmvc.service.Service;
+import com.openmvc.member.model.MultMember;
 
-@org.springframework.stereotype.Service(value = "reg")
-public class MemberRegServiceImpl implements Service {
+@Service
+public class MemberRegServiceImpl {
 
 	MemberDao dao;
 
-	@Override
-	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
+	public String register(MultMember multMember,HttpServletRequest request, Model model) {
 		
-		// 파일 업로드 - 사진
-		// 사용자 데이터를 받기 - uid, upw, uname, uphoto
-		int resultCnt = 0;
-
-		// 데이터 베이스에 입력할 데이터 변수
-		String uid = null;
-		String upw = null;
-		String uname = null;
-		String uphoto = null;
-
 		Connection conn = null;
-
+		
+		int result = 0;
+		
+		Member member = new Member(multMember.getUid(),
+				multMember.getUpw(),
+				multMember.getUname()
+				);
+		
 		try {
-			 //1. multiport/form-data 여부 확인
-			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-			if (isMultipart) {
-				// 2. 메모리나 파일로 업로드 파일 보관하는 FileItem의 Factory 설정
-				DiskFileItemFactory factory = new DiskFileItemFactory();
-				 // 3. 업로드 요청을 처리하는 ServletFileUpload 생성
-				ServletFileUpload upload = new ServletFileUpload(factory);
-				// 4. 업로드 요청 파싱해서 FileItem 목록 구함
-				List<FileItem> items = upload.parseRequest(request);
-				System.out.println(items.toString());
-				System.out.println(items);
-				Iterator<FileItem> ite = items.iterator();
-				while (ite.hasNext()) {
-					System.out.println("와일문왜안타니");
-					FileItem item = ite.next();
-
-					// isFormField() : text value를 가지는 input 확인
-					if (item.isFormField()) { // type=file 이외의 input
-						// 파라미터 이름
-						String paramName = item.getFieldName();
-						// 파라미터의 값
-						String paramValue = item.getString("utf-8");
-						// System.out.println(paramName + " = " + paramValue);
-
-						if (paramName.equals("uid")) {
-							uid = paramValue;
-						} else if (paramName.equals("upw")) {
-							upw = paramValue;
-						} else if (paramName.equals("uname")) {
-							uname = paramValue;
-						}
-
-					} else { // type=file
-
-						// 서버 내부의 경로
-						String uri = "/resources/upload/users";
-
-						// String uri =
-						// request.getSession().getServletContext().getInitParameter("uploadPath");
-
-						// 시스템의 실제(절대/물리적) 경로
-						String realPath = request.getSession().getServletContext().getRealPath(uri);
-						// System.out.println(realPath);
-
-						String newFileName = System.nanoTime() + "_" + item.getName();
-
-						// 서버의 저장소에 실제 저장
-						File saveFile = new File(realPath, newFileName);
-						item.write(saveFile);
-						System.out.println("저장 완료");
-
-						uphoto = uri + "/" + newFileName;
-
-					}
-
+				
+				
+				MultipartFile photo = multMember.getUphoto();
+				
+				// 사진이 있다면 사진 파일을 물리적으로 저장하고, 없다면 기본 이미지 파일의 경로를 저장한다.
+				if(photo != null && !photo.isEmpty() && photo.getSize() > 0) {
+				
+				//파일이름
+				photo.getOriginalFilename();
+				
+				//파일 경로
+				String path = request.getServletContext().getInitParameter("contextImagePath");
+				
+				//파일 절대 경로
+				String realPath = request.getSession().getServletContext().getRealPath(path);
+				
+				// 저장할 이미지 파일의 새로운 이름 생성
+				String newFileName = System.nanoTime() + "_" + photo.getOriginalFilename();
+				
+				// 서버의 저장소에 실제 저장
+				File saveFile = new File(realPath, newFileName);
+				
+				photo.transferTo(saveFile);
+				
+				System.out.println("저장 완료 : " + newFileName);
+				
+				// 데이터베이스에 저장할 Member 객체의 데이터를 완성한다. : 사진 경로
+				member.setUphoto(newFileName);
+				
+				} else {
+					member.setUphoto("defalult.png");
 				}
-
-				// 데이터 베이스 저장
-				Member member = new Member();
-				System.out.println(uid+upw+ uname+uphoto);
-				member.setUid(uid);
-				member.setUpw(upw);
-				member.setUname(uname);
-				member.setUphoto(uphoto);
-
 				conn = ConnectionProvider.getConnection();
 				
 				conn.setAutoCommit(false);
-
+				
 				dao = MemberDao.getInstance();
-
-				resultCnt = dao.insertMember(conn, member);
+			
+				result = dao.insertMember(conn, member);
 
 				conn.commit();
 				
-				request.setAttribute("member", member);
+				model.addAttribute("member", member);
 				
-				request.setAttribute("result", resultCnt);
-			}
-		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				model.addAttribute("result", result);
+			
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
+			
 		} finally {
 
 			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 
 		}
 
-		return "/WEB-INF/views/member/reg.jsp";
+		return "member/reg";
 	}
 
 }
