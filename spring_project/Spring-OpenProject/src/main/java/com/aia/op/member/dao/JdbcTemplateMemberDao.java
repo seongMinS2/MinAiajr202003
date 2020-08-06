@@ -98,7 +98,7 @@ public class JdbcTemplateMemberDao {
 		Member member = null;
 		String sql = "select * from project.member where uid=? and upw=?";
 		member = jdbcTemplate.queryForObject(sql, new MemberRowMapper(), uid, pw);
-
+		
 		return member;
 	}
 

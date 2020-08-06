@@ -2,6 +2,12 @@ package com.aia.op.member.model;
 
 import java.sql.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {"idx", "uid", "upw", "uname", "uphoto", "regdate"})
 public class Member {
 
 	private int idx;

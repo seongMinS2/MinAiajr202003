@@ -6,9 +6,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.aia.op.member.dao.JdbcTemplateMemberDao;
+import com.aia.op.member.dao.MemberDaoInterface;
 import com.aia.op.member.model.LoginInfo;
 import com.aia.op.member.model.LoginRequest;
 import com.aia.op.member.model.Member;
@@ -17,21 +19,31 @@ import com.aia.op.util.CookieBox;
 @Service
 public class MemberLoginService {
 	
-	@Inject
-	JdbcTemplateMemberDao dao;
+//	@Inject
+//	JdbcTemplateMemberDao dao;
 
+	private MemberDaoInterface dao;
+
+	@Inject
+	private SqlSessionTemplate sessionTemplate;
+	
+	
 	public String login(
 			LoginRequest loginRequest, 
 			HttpSession session, 
 			HttpServletResponse response) throws SQLException {
-
+		
+		// interface의 Mapper 객체 생성
+		
+		dao = sessionTemplate.getMapper(MemberDaoInterface.class);
+		
+		
 		String loginResult = "";
 
 		// 로그인 처리
 		Member member = null;
 
 			member = dao.selectByIdpw( loginRequest.getUid(), loginRequest.getUpw());
-
 			System.out.println("LoginService Member : " + member);
 
 			if (member != null) {

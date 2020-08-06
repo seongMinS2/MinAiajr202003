@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,8 +23,17 @@ public class JdbcTest {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Autowired
+	private SqlSessionTemplate sessionTemplate;
+	
 	@Inject
 	private JdbcTemplate template;
+	
+	@Test
+	public void SessionTemplateTest() throws SQLException {
+
+		System.out.println("jdbcTemplate =========> " + sessionTemplate);
+	}
 	
 	@Test
 	public void jdbcTemplateTest() {
@@ -41,5 +51,6 @@ public class JdbcTest {
 
 		System.out.println("Connection =====>" + conn);
 	}
+
 
 }

@@ -14,6 +14,12 @@
 		width :50px;
 		height : 50px;
 	}
+	
+	div.searchBox{
+	boorder : 1px solid #DDD;
+	padding : 20px;
+	width: 70%;
+	}
 </style>
 </head>
 <body>
@@ -27,6 +33,18 @@
 
 		<div>전체회원 ${listView.memberTotalCount} 명</div>
 		<hr>
+		
+		<div class="searchBox">
+			<form>
+				<select name="searchType">
+					<option value="id">ID</option>
+					<option value="name">NAME</option>
+					<option value="both">ID + NAME</option>
+				</select>
+				<input type="text" name="keyword">
+				<input type="submit" value="검색">
+			</form>
+		</div>
 
 		<table class="table">
 			<tr>
@@ -50,7 +68,10 @@
 				<td>
 				<a href="memberEdit?idx=${member.idx}">수정</a> 
 				| 
-				<a href="javascript:memberDel(${member.idx})">삭제</a></td>
+				<a href="javascript:memberDel(${member.idx})">삭제</a>
+				|
+				<a href="view/${member.idx}">정보조회</a>
+				</td>
 			</tr>
 		</c:forEach>
 		</c:if>
@@ -67,8 +88,12 @@
 		<div class="paging">
 			<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
 			
-			<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}" href="memberList?page=${i}" >${i}</a>
-			
+				<c:if test="${search['searchType'] == null || search['keyword'] == null}">
+					<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}" href="memberList?page=${i} " >${i}</a>
+				</c:if>
+				<c:if test="${search['searchType'] != null && search['keyword'] != null}">
+				<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}" href="memberList?page=${i}&searchType=${search['searchType']}&keyword=${search['keyword']}" >${i}</a>
+				</c:if>
 			</c:forEach>
 		</div>
 
@@ -78,9 +103,7 @@
 	</div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-</body>
-</html>
-
+	
 
 <script>
 	function memberDel(idx){
@@ -90,8 +113,9 @@
 		
 	}
 </script>
-
-
+	
+</body>
+</html>
 
 
 

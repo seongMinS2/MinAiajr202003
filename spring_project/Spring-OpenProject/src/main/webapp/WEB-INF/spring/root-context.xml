@@ -13,13 +13,41 @@
 	</bean> -->
 	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
-		p:driverClassName="com.mysql.cj.jdbc.Driver"
-		p:jdbcUrl ="jdbc:mysql://localhost:3306/project?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"
-		p:username="bit" p:password="bit">
+	   	  p:driverClassName="com.mysql.cj.jdbc.Driver"
+		  p:jdbcUrl ="jdbc:mysql://localhost:3306/project?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"
+		  p:username="bit" p:password="bit">
 	</bean>
 	
 	<bean id="jdbcTemplate"
-        class="org.springframework.jdbc.core.JdbcTemplate"
-        p:dataSource-ref="dataSource"></bean>
+          class="org.springframework.jdbc.core.JdbcTemplate"
+          p:dataSource-ref="dataSource"></bean>
+	 
+	 <!-- 
+	 	sqlSessionFactory 생성
+	 	
+	 	mybatis-spring : SqlSessionfactoryBean
+	 	
+	 	: dataSource 생성, mapper 설정
+	 	
+	 -->
+	 
+	 <bean id="sqlSessionFactory"
+	 		class="org.mybatis.spring.SqlSessionFactoryBean"
+	 		p:dataSource-ref="dataSource"
+	 		p:mapperLocations="classpath:com/aia/op/mybatis/mapper/*.xml"
+	 		
+	 ></bean>
+	 
+	 <!-- 
+	 
+	 	Mybatis를 이용하는 template 클래스 => sqlSessionTemplate
+	 	
+	  -->
+	  
+	  <bean id="sqlSession"
+			class="org.mybatis.spring.SqlSessionTemplate"	  
+	  >
+	  	<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	  </bean>
 	 
 </beans>

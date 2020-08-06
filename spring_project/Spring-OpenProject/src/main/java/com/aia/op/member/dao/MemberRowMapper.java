@@ -15,7 +15,7 @@ public class MemberRowMapper implements RowMapper<Member> {
 		member.setIdx(rs.getInt("idx"));
 		member.setUid(rs.getString("uid"));
 		member.setUpw(rs.getString("upw"));
-		member.setUpw(rs.getString("uname"));
+		member.setUname(rs.getString("uname"));
 		member.setUphoto(rs.getString("uphoto"));
 		return member;
 	}
